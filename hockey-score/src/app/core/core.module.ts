@@ -22,11 +22,13 @@ import {
   MatTabsModule,
   MatTooltipModule, MatCheckboxModule
 } from "@angular/material";
+import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent],
-  exports: [HeaderComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent],
+  exports: [HeaderComponent, FooterComponent, HomeComponent],
   imports: [
     CommonModule,
     MatButtonModule,

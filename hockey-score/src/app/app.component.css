@@ -1,0 +1,18 @@
+  
+.material-icons_text{
+    display: block;
+    margin: 0;
+  }
+
+
+  .material-icons{
+    margin-top: 0px;
+  }
+
+
+  .app-footer {
+    position: fixed;
+    bottom: 0px;
+    margin-bottom: 0px;
+    width: 100%;
+  }
