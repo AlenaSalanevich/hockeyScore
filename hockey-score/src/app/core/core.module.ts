@@ -24,10 +24,11 @@ import {
 } from "@angular/material";
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { CourseComponent } from './model/course/course.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent, CourseComponent],
   exports: [HeaderComponent, FooterComponent, HomeComponent],
   imports: [
     CommonModule,
