@@ -24,33 +24,27 @@ import {
 } from "@angular/material";
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { CourseComponent } from './model/course/course.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent, CourseComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent],
   exports: [HeaderComponent, FooterComponent, HomeComponent],
   imports: [
     CommonModule,
     MatButtonModule,
     MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
     MatGridListModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatPaginatorModule,
     MatRadioModule,
     MatSidenavModule,
-    MatSliderModule,
     MatTabsModule,
     MatTableModule,
     MatToolbarModule,
-    MatTooltipModule,
-    MatSelectModule,
+    MatSelectModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
