@@ -8,10 +8,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CourseListComponent } from './courses/course-list/course-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CourseListComponent
   ],
   imports: [
     FormsModule,
