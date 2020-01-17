@@ -26,7 +26,7 @@ import { LogoComponent } from './logo/logo.component';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent],
-  exports: [HeaderComponent, FooterComponent, HomeComponent],
+  exports: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent],
   imports: [
     CommonModule,
     MatButtonModule,
