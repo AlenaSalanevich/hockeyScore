@@ -1,27 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CourseListComponent } from './courses/course-list/course-list.component';
+import { CoursesModule } from './courses/courses.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CourseListComponent
+    AppComponent
   ],
   imports: [
     FormsModule,
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-   ReactiveFormsModule,
-   CoreModule
+    ReactiveFormsModule,
+    CoursesModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],
