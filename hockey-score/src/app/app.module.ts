@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CoursesModule } from './courses/courses.module';
 import { SharedModule } from './shared/shared.module';
+import { TeamsModule } from './teams/teams.module';
+import { PlayersModule } from './players/players.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     CoursesModule,
-    SharedModule
+    SharedModule,
+    TeamsModule,
+    PlayersModule
   ],
   providers: [],
   bootstrap: [AppComponent],
