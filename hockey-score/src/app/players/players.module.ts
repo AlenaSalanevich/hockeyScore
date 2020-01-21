@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { PlayerComponent } from './player/player.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -10,7 +11,10 @@ import { PlayerComponent } from './player/player.component';
   declarations: [PlayerListComponent, PlayerComponent],
   exports: [PlayerListComponent, PlayerComponent],
   imports: [
-    CommonModule, SharedModule
+    CommonModule,
+    SharedModule,
+    MatTableModule
+
   ]
 })
 export class PlayersModule { }

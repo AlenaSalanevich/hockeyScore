@@ -4,6 +4,7 @@ import { TeamListComponent } from './team-list/team-list.component';
 import { TeamComponent } from './team/team.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatButtonModule, MatCardModule, MatIconModule, MatListModule } from '@angular/material';
+import { PlayersModule } from '../players/players.module';
 
 
 
@@ -16,7 +17,8 @@ import { MatButtonModule, MatCardModule, MatIconModule, MatListModule } from '@a
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    PlayersModule
   ]
 })
 export class TeamsModule { }
