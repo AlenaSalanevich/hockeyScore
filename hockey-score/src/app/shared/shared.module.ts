@@ -21,6 +21,7 @@ import {
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LogoComponent } from './logo/logo.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -42,7 +43,8 @@ import { LogoComponent } from './logo/logo.component';
     MatTabsModule,
     MatTableModule,
     MatToolbarModule,
-    MatSelectModule
+    MatSelectModule,
+    RouterModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

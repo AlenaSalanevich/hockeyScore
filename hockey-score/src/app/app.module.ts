@@ -10,6 +10,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { TeamsModule } from './teams/teams.module';
 import { PlayersModule } from './players/players.module';
+import { Router, RouterModule } from '@angular/router';
+import { ROUTES } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { PlayersModule } from './players/players.module';
     ReactiveFormsModule,
     SharedModule,
     TeamsModule,
-    PlayersModule
+    PlayersModule,
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [],
   bootstrap: [AppComponent],
