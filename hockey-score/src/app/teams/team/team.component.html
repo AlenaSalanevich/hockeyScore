@@ -1,1 +1,29 @@
-<p>team works!</p>
+<mat-card class="card">
+  <mat-card-header>
+    <mat-icon> <i class="material-icons"> sports_hockey </i> </mat-icon>
+    <mat-card-title>{{team.name}}</mat-card-title>
+    <mat-card-subtitle>{{team.city}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <p>Teams score</p>{{team.score}}
+    </div>
+  </mat-card-content>
+  <mat-card-content>
+    {{team.players | json}}
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button class="mat-icon-button-card-actions">
+      <mat-icon><i class="material-icons md-24 grey" aria-hidden="true"
+          (click)="onDeleteSelect(team); editSelectedPoint = null">delete</i>
+      </mat-icon>
+    </button>
+
+    <button mat-icon-button class="mat-icon-button-card-actions">
+      <mat-icon><i class="material-icons md-24 grey" aria-hidden="true"
+          (click)="onEditSelect(team); deleteSelectedPoint = null">mode_edit</i>
+      </mat-icon>
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>{{team.description}}</mat-card-footer>
+</mat-card>

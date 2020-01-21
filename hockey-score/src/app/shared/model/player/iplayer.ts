@@ -1,4 +1,6 @@
 import { Shoots } from '../shoots.enum';
+import { Country } from '../country.enum';
+import { Position } from '../position.enum';
 
 export interface Iplayer {
 

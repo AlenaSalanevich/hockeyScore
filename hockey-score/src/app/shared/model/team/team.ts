@@ -5,17 +5,19 @@ import { Player } from '../player/player';
  */
 export class Team {
 
-    private _id: number;
-    private _name: string;
-    private _players: Player[];
-    private _score: number;
-    private _city: string;
+    id: number;
+    name: string;
+    players: Player[];
+    score: number;
+    city: string;
+    description: string;
 
-    constructor(id: number, name: string, players: Player[], score: number, city: string) {
-        this._id = id;
-        this._name = name;
-        this._players = players;
-        this._score = score;
-        this._city = city;
+    constructor(id: number, name: string, players: Player[], score: number, city: string, description: string) {
+        this.id = id;
+        this.name = name;
+        this.players = players;
+        this.score = score;
+        this.city = city;
+        this.description = description;
     }
 }

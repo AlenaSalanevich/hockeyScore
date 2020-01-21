@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CoursesModule } from './courses/courses.module';
 import { SharedModule } from './shared/shared.module';
 import { TeamsModule } from './teams/teams.module';
 import { PlayersModule } from './players/players.module';
@@ -22,7 +21,6 @@ import { PlayersModule } from './players/players.module';
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    CoursesModule,
     SharedModule,
     TeamsModule,
     PlayersModule

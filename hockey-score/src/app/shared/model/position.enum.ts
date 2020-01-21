@@ -1,4 +1,5 @@
 export enum Position {
     "defender",
-    "goalkeeper"
+    "goalkeeper",
+    "forward"
 }
