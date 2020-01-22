@@ -25,6 +25,7 @@ export class TeamComponent implements OnInit {
 
   onEditSelect(team) {
     console.log("edit " + team.name);
+  
   }
 
 }

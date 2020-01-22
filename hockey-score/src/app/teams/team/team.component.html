@@ -1,42 +1,36 @@
-<div>
-  <mat-card class="card">
-    <mat-card-header>
-      <mat-icon> <i class="material-icons"> sports_hockey </i> </mat-icon>
-      <mat-card-title>{{team.name}}</mat-card-title>
-      <mat-card-subtitle>{{team.city}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <div>
-        <p>Teams score</p>{{team.score}}
-      </div>
-    </mat-card-content>
-    <mat-card-content>
-      <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false">
+<mat-card class="team-card">
+  <mat-card-header>
+    <div mat-card-avatar class="team-header-image"></div>
+    <mat-card-title>{{team.name}}</mat-card-title>
+    <mat-card-subtitle>{{team.city}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo">
+  <mat-card-content>
+    <p>
+      {{team.description}}
+    </p>
+     <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
-            Players
+              Players
             </mat-panel-title>
             <mat-panel-description>
             </mat-panel-description>
-          </mat-expansion-panel-header> 
+          </mat-expansion-panel-header>
           <app-player *ngFor="let player of players" [player]="player"></app-player>
         </mat-expansion-panel>
       </mat-accordion>
-    </mat-card-content>
-    <mat-card-actions>
+  </mat-card-content>
+  <mat-card-actions> 
       <button mat-icon-button class="mat-icon-button-card-actions">
-        <mat-icon><i class="material-icons md-24 grey" aria-hidden="true"
-            (click)="onDeleteSelect(team)">delete</i>
+        <mat-icon><i class="material-icons md-24 blue" aria-hidden="false" (click)="onDeleteSelect(team)">delete</i>
         </mat-icon>
       </button>
       <button mat-icon-button class="mat-icon-button-card-actions">
-        <mat-icon><i class="material-icons md-24 grey" aria-hidden="true"
-            (click)="onEditSelect(team)">mode_edit</i>
+        <mat-icon><i class="material-icons md-24 blue" aria-hidden="false" (click)="onEditSelect(team)">mode_edit</i>
         </mat-icon>
       </button>
     </mat-card-actions>
-    <mat-card-footer>{{team.description}}</mat-card-footer>
-  </mat-card>
-</div>
+ <!--  <mat-card-footer>....</mat-card-footer> -->
+</mat-card>

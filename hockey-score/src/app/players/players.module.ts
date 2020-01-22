@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { PlayerComponent } from './player/player.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material';
 
 
 
@@ -13,7 +14,8 @@ import { MatTableModule } from '@angular/material/table';
   imports: [
     CommonModule,
     SharedModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule
 
   ]
 })
