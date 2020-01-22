@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Player } from 'src/app/shared/model/player/player';
 
 @Component({
@@ -8,6 +8,7 @@ import { Player } from 'src/app/shared/model/player/player';
 })
 export class PlayerComponent implements OnInit {
   @Input() public player: Player;
+  
   constructor() { }
 
   ngOnInit() {

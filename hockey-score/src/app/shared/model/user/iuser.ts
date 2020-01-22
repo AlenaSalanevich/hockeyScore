@@ -2,7 +2,8 @@
  * User entity interface.
  */
 export interface Iuser {
-    _id: number;
-    _last_name: string;
-    _first_name: string;
+    id: number;
+    last_name: string;
+    first_name: string;
+    email: string;
 }

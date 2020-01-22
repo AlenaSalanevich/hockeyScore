@@ -22,12 +22,15 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LogoComponent } from './logo/logo.component';
 import { RouterModule } from '@angular/router';
+import { SearchComponent } from './search/search.component';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent],
-  exports: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent, SearchComponent, LoginComponent],
+  exports: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent, SearchComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -44,7 +47,9 @@ import { RouterModule } from '@angular/router';
     MatTableModule,
     MatToolbarModule,
     MatSelectModule,
-    RouterModule
+    RouterModule,
+    MatInputModule,
+    FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

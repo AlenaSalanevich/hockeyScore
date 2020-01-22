@@ -1,3 +1,5 @@
+<div>
+    <app-search></app-search>
 <table mat-table
        [dataSource]="players" multiTemplateDataRows
        class="mat-elevation-z8">
@@ -32,3 +34,4 @@
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
+</div>
