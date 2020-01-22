@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TeamService } from '../team.service';
 import { Team } from 'src/app/shared/model/team/team';
 import { Player } from 'src/app/shared/model/player/player';
+import { TeamListComponent } from '../team-list/team-list.component';
 
 @Component({
   selector: 'app-team',
@@ -9,8 +10,9 @@ import { Player } from 'src/app/shared/model/player/player';
   styleUrls: ['./team.component.css'],
 })
 export class TeamComponent implements OnInit {
-  @Input() public team: Team
-  players: Player[];
+
+  @Input() team: Team;
+  @Input() players: Player[];
   constructor() { }
   columnsToDisplay = ['number', 'name', 'position', 'country', 'age', 'shoots', 'height', 'weight'];
   ngOnInit() {
