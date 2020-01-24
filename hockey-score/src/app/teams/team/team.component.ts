@@ -12,11 +12,11 @@ import { TeamListComponent } from '../team-list/team-list.component';
 export class TeamComponent implements OnInit {
 
   @Input() team: Team;
-  @Input() players: Player[];
+
   constructor() { }
   columnsToDisplay = ['number', 'name', 'position', 'country', 'age', 'shoots', 'height', 'weight'];
   ngOnInit() {
-    this.players = this.team.players;
+
   }
 
   onDeleteSelect(team) {
@@ -25,7 +25,7 @@ export class TeamComponent implements OnInit {
 
   onEditSelect(team) {
     console.log("edit " + team.name);
-  
+
   }
 
 }

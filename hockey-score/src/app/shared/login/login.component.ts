@@ -8,12 +8,11 @@ import { Login } from '../model/user/login';
 })
 export class LoginComponent implements OnInit {
 
-  @Input() login: Login;
+  login: Login;
   error: string;
 
   constructor() {
-    this.login = new Login('', '');
-    this.error = '';
+
   }
 
   minPasswordLength: number = 2;
@@ -26,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.login = new Login('', '');
+    this.error = '';
   }
-
 }
