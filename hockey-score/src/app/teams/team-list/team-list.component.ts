@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Team } from 'src/app/shared/model/team/team';
 import { TeamService } from '../team.service';
-import { Position } from 'src/app/shared/model/position.enum';
-import { Shoots } from 'src/app/shared/model/shoots.enum';
-import { Country } from 'src/app/shared/model/country.enum';
+
 
 @Component({
   selector: 'app-team-list',
@@ -12,13 +10,19 @@ import { Country } from 'src/app/shared/model/country.enum';
 })
 export class TeamListComponent implements OnInit {
 
- public teams: Team[] = [];
-  
+  public teams: Team[] = [];
 
   constructor(readonly teamService: TeamService) { }
 
   ngOnInit() {
     this.teams =
-       this.teamService.getTeams(); 
+      this.teamService.getTeams();
+  }
+
+
+
+  onDeleteClicked(teamName) {
+    console.log("delete " + teamName);
+    this.teams = this.teams.filter(team => team.name !== teamName)
   }
 }
