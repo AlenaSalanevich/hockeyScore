@@ -25,4 +25,17 @@ export class TeamListComponent implements OnInit {
     console.log("delete " + teamName);
     this.teams = this.teams.filter(team => team.name !== teamName)
   }
+
+  addTeam() {
+    console.log(this.teams.length);
+    const size: number = this.teams.push({
+      id: 1,
+      name: "addedTeam",
+      players: [],
+      score: 0,
+      city: "Hrodna",
+      description: "New team"
+    });
+    console.log(size);
+  }
 }
