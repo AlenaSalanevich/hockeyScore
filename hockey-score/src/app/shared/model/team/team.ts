@@ -1,18 +1,23 @@
 import { User } from '../user/user';
+import { Player } from '../player/player';
 /**
  * Team entity class without interface with private fields, constructor, getters and setters
  */
 export class Team {
 
-    private _name: string;
-    private _users: User[];
-    private _score: number;
+    id: number;
+    name: string;
+    players: Player[];
+    score: number;
+    city: string;
+    description: string;
 
-
-constructor(public name:string, public users: User[], public score:number){
-    this._name=name;
-    this._users=users;
-    this._score=score;
-}
-
+    constructor(id: number, name: string, players: Player[], score: number, city: string, description: string) {
+        this.id = id;
+        this.name = name;
+        this.players = players;
+        this.score = score;
+        this.city = city;
+        this.description = description;
+    }
 }

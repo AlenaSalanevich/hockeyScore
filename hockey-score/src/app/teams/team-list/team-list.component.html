@@ -1,0 +1,11 @@
+<app-search></app-search>
+<button mat-icon-button>
+    <mat-icon><i class="material-icons md-48 blue" aria-hidden="true" (click)="addTeam()">add_circle</i></mat-icon>
+</button>
+<mat-divider></mat-divider>
+
+<div>
+    <app-team *ngFor="let team of teams" [team]="team" (onDelete)="onDeleteClicked($event)">
+        <mat-divider></mat-divider>
+    </app-team>
+</div>

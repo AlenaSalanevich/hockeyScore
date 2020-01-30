@@ -7,18 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  counter: number=0;
+  counter: number = 0;
   constructor() { }
 
   ngOnInit() {
   }
 
- /**
-  * handleClick
-  * 
-  */
-  handleClick () {
-  console.log('clicked!');
-  this.counter++; 
- } 
+  /**
+   * handleClick
+   * 
+   */
+  handleClick() {
+    console.log('clicked!');
+    this.counter++;
+  }
 }

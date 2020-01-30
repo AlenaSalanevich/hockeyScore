@@ -1,20 +1,30 @@
 <mat-toolbar role="heading" class="app-bar mat-elevation-z6" color="primary">
 
   <app-logo></app-logo>
-  
-  <button mat-button class="m-toolbar-button">
-    <mat-icon> <i class="material-icons">menu</i>
+
+  <button mat-button class="m-toolbar-button" routerLink = '../home'>
+    <mat-icon> <i class="material-icons">home</i>
     </mat-icon>
+  </button>
+
+  <button mat-button class="m-toolbar-button" routerLink='../teams'>
+    <mat-icon> <i class="material-icons">people</i>
+    </mat-icon> Teams
+  </button>
+
+  <button mat-button class="m-toolbar-button" routerLink='../players'>
+    <mat-icon> <i class="material-icons">person</i>
+    </mat-icon> Players
   </button>
 
   <span class="app-toolbar-filler"></span>
   <button mat-button class="m-toolbar-button">
     <mat-icon><i class="material-icons">settings_applications</i> </mat-icon>
   </button>
-  <button mat-icon-button class="m-toolbar-button">
+  <button mat-icon-button class="m-toolbar-button" routerLink='../login'>
     <mat-icon><i class="material-icons">lock_outline</i></mat-icon>
   </button>
-  <button mat-button class="m-toolbar-button">
+  <button mat-button class="m-toolbar-button" routerLink='../logout'>
     <mat-icon> <i class="material-icons">lock_open</i></mat-icon>
   </button>
 

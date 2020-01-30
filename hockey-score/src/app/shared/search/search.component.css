@@ -1,0 +1,50 @@
+.material-icons.blue {
+    color: #3f51b5;
+    font-size: 48px;
+  }
+  
+  .material-icons.grey {
+    color: lightgrey;
+  }
+  
+  .material-icons.search {
+    color: grey;
+    font-size: 18px;
+  }
+  
+  .material-icons-text {
+    font-size: 10px;
+    font-weight: bold;
+    color: #3f51b5;
+  }
+  
+  .mat-icon-button {
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+  }
+  
+  .search-button {
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  .search-form-field {
+    font-family: inherit;
+    color: inherit;
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+  }
+  
+  .search-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    color: #3f51b5;
+    align-items: right;
+  }
