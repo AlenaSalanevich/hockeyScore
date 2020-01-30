@@ -1,4 +1,4 @@
 export enum Country {
-    "BY",
-    "RU"
+    by = 'BY',
+    ru = 'RU'
 }

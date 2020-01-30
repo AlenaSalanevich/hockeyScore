@@ -1,4 +1,4 @@
 export enum Shoots {
-    "left",
-    "right"
+    left = 'LEFT',
+    right = 'RIGHT'
 }

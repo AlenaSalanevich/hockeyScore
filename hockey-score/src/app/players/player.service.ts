@@ -24,7 +24,7 @@ export class PlayerService {
         weight: 90,
         age: 36,
         shoots: Shoots.left,
-        country: Country.BY,
+        country: Country.by,
         stats: []
       },
       {
@@ -37,7 +37,7 @@ export class PlayerService {
         weight: 90,
         age: 36,
         shoots: Shoots.left,
-        country: Country.BY,
+        country: Country.by,
         stats: []
       },
       {
@@ -50,7 +50,7 @@ export class PlayerService {
         weight: 90,
         age: 36,
         shoots: Shoots.right,
-        country: Country.BY,
+        country: Country.by,
         stats: []
       },
       {
@@ -63,7 +63,7 @@ export class PlayerService {
         weight: 90,
         age: 36,
         shoots: Shoots.left,
-        country: Country.RU,
+        country: Country.ru,
         stats: []
       }
     ]
