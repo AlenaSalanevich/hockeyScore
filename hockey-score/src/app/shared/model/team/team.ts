@@ -20,4 +20,5 @@ export class Team {
         this.city = city;
         this.description = description;
     }
+
 }
