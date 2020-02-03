@@ -47,5 +47,6 @@ module.exports = function (config) {
           included: true,
           watched: true
         }]
-    });
+    }
+  });
 };
