@@ -18,10 +18,6 @@ describe('PlayerService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-  it('should use PlayerService', () => {
-    expect(service.getPlayers().length).toEqual(4);
-  });
 });
 
 describe('PlayerService', () => {
@@ -54,7 +50,10 @@ describe('PlayerService', () => {
   });
 
   it('should use PlayerService', () => {
-    expect(service.getPlayers().find(player => player.id === expectedPlayer.id)).toEqual(expectedPlayer);
+    const players: Player[] = service.getPlayers();
+    expect(players.length).toEqual(4);
+    expect(players.find(player => player.id === expectedPlayer.id)).toEqual(expectedPlayer);
+    expect(players).toContain(expectedPlayer);
   });
-  expect(service.getPlayers()).toContain(expectedPlayer);
+
 });
