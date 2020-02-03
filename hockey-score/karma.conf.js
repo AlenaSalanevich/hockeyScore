@@ -26,21 +26,26 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
-    restartOnFileChange: true,
-    files: [
+    customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      },
+      singleRun: false,
+      restartOnFileChange: true,
+      files: [
 
-      { pattern: 'node_modules/@material/*/dist/*', included: false, watched: false },
-      // Include all Angular dependencies
-      { pattern: 'node_modules/@angular/**/*', included: false, watched: false },
-      { pattern: 'node_modules/rxjs/**/*', included: false, watched: false },
+        { pattern: 'node_modules/@material/*/dist/*', included: false, watched: false },
+        // Include all Angular dependencies
+        { pattern: 'node_modules/@angular/**/*', included: false, watched: false },
+        { pattern: 'node_modules/rxjs/**/*', included: false, watched: false },
 
-      // Include a Material theme in the test suite. Also include the MDC theme as
-      // karma runs tests for the MDC prototype components as well.
-      {
-        pattern: '~@angular/material/prebuilt-themes/indigo-pink.css',
-        included: true,
-        watched: true
-      }]
-  });
+        // Include a Material theme in the test suite. Also include the MDC theme as
+        // karma runs tests for the MDC prototype components as well.
+        {
+          pattern: '~@angular/material/prebuilt-themes/indigo-pink.css',
+          included: true,
+          watched: true
+        }]
+    });
 };
