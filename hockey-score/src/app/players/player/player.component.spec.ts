@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('PlayerComponent', () => {
   let component: PlayerComponent;
   let fixture: ComponentFixture<PlayerComponent>;
+  let playerService: PlayerService;
   let playerServiceSpy: jasmine.SpyObj<PlayerService>;
   let stubPlayers: Player[];
   let getPlayersSpy: any;
@@ -46,13 +47,12 @@ describe('PlayerComponent', () => {
       providers: [{ provide: PlayerService, useValue: spy }]
     })
       .compileComponents();
-  }));
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(PlayerComponent);
+    playerService = TestBed.inject(PlayerService);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+    
+  }));
 
   it('should create', () => {
 
