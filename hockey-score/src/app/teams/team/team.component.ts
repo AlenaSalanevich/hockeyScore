@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Team } from 'src/app/shared/model/team/team';
-import { Player } from 'src/app/shared/model/player/player';
 import { EventEmitter } from '@angular/core';
 
 @Component({
@@ -12,7 +11,7 @@ export class TeamComponent implements OnInit {
 
   @Input() team: Team;
 
-  @Output() onDelete = new EventEmitter();
+  @Output() onDelete = new EventEmitter<Team>();
 
   onDeleteSelect(team) {
     this.onDelete.emit(team.name);
@@ -27,5 +26,4 @@ export class TeamComponent implements OnInit {
   onEditSelect(team) {
     console.log('edit ' + team.name);
   }
-
 }
