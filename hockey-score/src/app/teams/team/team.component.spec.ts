@@ -44,8 +44,11 @@ describe('TeamComponent', () => {
   });
 
   it('should bind team component deleted name event', () => {
-    fixture.debugElement.query(By.css('.delete-button')).triggerEventHandler('click', null);
-    expect(component.deletedName).toBe(component.team.name);
+    const deleteButton = fixture.debugElement.query(By.css('.delete-button'));
+    deleteButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(component.onDelete(component.team));
+    
   });
 });
 
@@ -88,8 +91,9 @@ class TestHostComponent {
     }]
   };
   public deletedName: string;
-  public onDelete(name: string): void {
-    this.deletedName = name;
+
+  public onDelete(team: Team): void {
+    this.deletedName = team.name;
   }
 }
 

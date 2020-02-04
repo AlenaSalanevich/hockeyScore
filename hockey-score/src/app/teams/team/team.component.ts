@@ -9,9 +9,9 @@ import { EventEmitter } from '@angular/core';
 })
 export class TeamComponent implements OnInit {
 
-  @Input() team: Team;
+  @Input() public team: Team;
 
-  @Output() onDelete = new EventEmitter<Team>();
+  @Output() public onDelete = new EventEmitter<Team>();
 
   onDeleteSelect(team) {
     this.onDelete.emit(team.name);
