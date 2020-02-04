@@ -17,8 +17,7 @@
         <input matInput placeholder="Password" type="password" id="password" required minlength="{{minPasswordLength}}"
           maxlength="{{maxPasswordLength}}" [(ngModel)]="login.password" name="password" #password="ngModel">
       </mat-input-container>
-      <button class="login-data-row login-button" mat-raised-button color="primary" [disabled]="!userForm.form.valid"
-        (click)="onLoginSelect()">Login
+      <button class="login-data-row login-button" mat-raised-button color="primary" [disabled]="!userForm.form.valid">Login
       </button>
     </form>
   </div>

@@ -5,8 +5,7 @@
 <mat-divider></mat-divider>
 
 <div>
-    <app-team *ngFor="let team of teams; let isEven = even" [team]="team" (onDelete)="onDeleteClicked($event)">
-        <span backround-color = "blue" *ngIf="isEven"></span>
+    <app-team *ngFor="let team of teams; let isEven = even" [team]="team" (onDelete)="onDeleteClicked($event)"
+        (onEdit)="onEditClicked($event)">
     </app-team>
 </div>
-<!--  -->

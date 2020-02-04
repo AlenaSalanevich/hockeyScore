@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,22 +10,17 @@ export class HeaderComponent implements OnInit {
 
   isLogin: boolean;
 
-  constructor() { }
+  constructor(private readonly authService: AuthService) {
+    this.isLogin = false;
+    this.authService.isLogin.subscribe(result => this.isLogin = result);
+  }
 
   ngOnInit() {
     this.isLogin = false;
   }
 
-  onLoginClicked(isLogin: boolean) {
-    console.log('header component onLoginClicked ' + isLogin);
-    this.isLogin = isLogin;
-  }
-  /**
-   * handleClick
-   * 
-   */
   logout() {
     console.log('log out!');
-    this.isLogin = false;
+    this.authService.logout();
   }
 }

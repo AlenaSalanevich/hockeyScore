@@ -5,11 +5,15 @@ import { HeaderComponent } from './header.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared.module';
 import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
+import { AuthService } from '../auth.service';
+import { Login } from '../model/user/login';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
+  let authServiceSpy: jasmine.SpyObj<AuthService>;
 
+  const spy = jasmine.createSpyObj('AuthService', ['login', 'logout']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
@@ -18,7 +22,8 @@ describe('HeaderComponent', () => {
         MatButtonModule,
         MatIconModule,
         MatToolbarModule
-      ]
+      ],
+      providers: [{ provide: AuthService, useValue: spy }]
     })
       .compileComponents();
   }));
@@ -27,6 +32,7 @@ describe('HeaderComponent', () => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    authServiceSpy = TestBed.get(AuthService);
   });
 
   afterEach(() => fixture.destroy());
@@ -34,4 +40,9 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('#authservice should return stubbed value from a spy', () => {
+    authServiceSpy.login.withArgs(new Login("", "")).and.stub;
+  });
+
 });

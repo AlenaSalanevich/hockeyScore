@@ -1,36 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Login } from './model/user/login';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private isLogin: boolean = false;
+  private readonly _isLogin: BehaviorSubject<boolean>;
 
   private admin: Login = new Login("admin", "admin");
 
   constructor() {
+    this._isLogin = new BehaviorSubject(false);
 
   }
 
-  login(userCredentials: Login): boolean {
+  login(userCredentials: Login) {
     if (userCredentials.login === this.admin.login && userCredentials.password === this.admin.password) {
-      this.isLogin = true;
+      this._isLogin.next(true);
     }
     else {
-      this.isLogin = false;
+      this._isLogin.next(false);
     }
-    return this.isLogin;
   }
 
-  logout(): boolean {
-    this.isLogin = false;
-    return this.isLogin;
+  logout() {
+    this._isLogin.next(false);
   }
 
-
-  public getIsLogin(): boolean {
-    return this.isLogin;
+  /**
+   * Get the auth property.
+   *
+   * @returns {Observable<boolean>} the auth property.
+   */
+  get isLogin() {
+    return this._isLogin;
   }
 }
