@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,18 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  counter: number = 0;
+  isLogin: boolean;
+
   constructor() { }
 
   ngOnInit() {
+    this.isLogin = false;
   }
 
+  onLoginClicked(isLogin: boolean) {
+    console.log('header component onLoginClicked ' + isLogin);
+    this.isLogin = isLogin;
+  }
   /**
    * handleClick
    * 
    */
-  handleClick() {
-    console.log('clicked!');
-    this.counter++;
+  logout() {
+    console.log('log out!');
+    this.isLogin = false;
   }
 }

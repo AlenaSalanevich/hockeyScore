@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Login } from '../model/user/login';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,9 @@ export class LoginComponent implements OnInit {
   login: Login;
   error: string;
 
-  constructor() {
+  @Output() public onLogin = new EventEmitter<boolean>();
 
+  constructor(private readonly router: Router) {
   }
 
   minPasswordLength: number = 2;
@@ -20,8 +22,15 @@ export class LoginComponent implements OnInit {
   minLoginLength: number = 2;
   maxLoginLength: number = 5;
 
-  tryAuth() {
+  tryLogin() {
     console.log(this.login.login, this.login.password);
+    this.router.navigateByUrl('/home')
+  }
+
+  onLoginSelect() {
+    const isLogin: boolean = true;
+    console.log('click onLoginSelect, emit ' + isLogin);
+    this.onLogin.emit(isLogin);
   }
 
   ngOnInit() {
