@@ -52,6 +52,49 @@ describe('TeamComponent', () => {
   });
 });
 
+describe('TeamComponent', () => {
+  let component: TeamComponent;
+  let fixture: ComponentFixture<TeamComponent>;
+  
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TeamComponent);
+    component = fixture.componentInstance;
+  
+    component.team = {
+      id: 1,
+      name: "1stTeam",
+      players: [{
+        id: 1,
+        name: "1stPlayer",
+        position: Position.defender,
+        number: 78,
+        born: new Date(),
+        height: 180,
+        weight: 90,
+        age: 36,
+        shoots: Shoots.left,
+        country: Country.by,
+        stats: []
+      }],
+      score: 12,
+      city: "Hrodna",
+      description: "The oldest team"
+    };
+  
+    fixture.detectChanges();
+  });
+  
+  it('should bind team component deleted name event', () => {
+    spyOn(component.onDelete, 'emit');
+    const deleteButton = fixture.debugElement.query(By.css('#deleteBtn'));
+    console.warn(deleteButton)
+    deleteButton.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(component.onDelete.emit).toHaveBeenCalledWith(component.team.name);
+  
+  });
+  });
+
 @Component({
   template: `<div> 
     <mat-card class="team-card">
@@ -62,7 +105,6 @@ describe('TeamComponent', () => {
     </mat-card-header>
     </mat-card>
     <app-player *ngFor="let player of team.players" [player]="player"></app-player>   
-   <button class="delete-button" [team]="team" (deletedName) = "onDelete($event)"></button>
     </div>`
 })
 class TestHostComponent {
