@@ -21,18 +21,25 @@ export class TeamListComponent implements OnInit {
 
 
 
-  onDeleteClicked(teamName) {
-    console.log("delete " + teamName);
-    this.teams = this.teams.filter(team => team.name !== teamName)
+  onDeleteClicked(team) {
+    console.log("delete " + team.name);
+    this.teams = this.teams.filter(t => t.name !== team.name)
+  }
+
+
+  onEditClicked(team) {
+    console.log("edit " + team);
+    let editedTeam: Team = this.teams.find(t => t.name == team.name);
+    editedTeam.name = team.name + 'Update';
+    this.teams.push(editedTeam);
   }
 
   addTeam() {
-    console.log(this.teams.length);
     const size: number = this.teams.push({
-      id: 1,
+      id: 1111,
       name: "addedTeam",
       players: [],
-      score: 0,
+      score:1000,
       city: "Hrodna",
       description: "New team"
     });

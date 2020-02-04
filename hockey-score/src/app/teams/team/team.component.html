@@ -23,13 +23,12 @@
     </mat-accordion>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-icon-button class="mat-icon-button-card-actions">
-      <mat-icon><i class="material-icons md-24 blue" aria-hidden="false" id="deleteBtn"
-          (click)="onDeleteSelect(team)">delete</i>
+    <button mat-icon-button class="mat-icon-button-card-actions" id="deleteBtn" (click)="onDeleteSelect(team)">
+      <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">delete</i>
       </mat-icon>
     </button>
-    <button mat-icon-button class="mat-icon-button-card-actions">
-      <mat-icon><i class="material-icons md-24 blue" aria-hidden="false" (click)="onEditSelect(team)">mode_edit</i>
+    <button mat-icon-button class="mat-icon-button-card-actions" (click)="onEditSelect(team)" id="editBtn">
+      <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">mode_edit</i>
       </mat-icon>
     </button>
   </mat-card-actions>

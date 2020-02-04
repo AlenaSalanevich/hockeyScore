@@ -12,9 +12,11 @@ export class TeamComponent implements OnInit {
   @Input() public team: Team;
 
   @Output() public onDelete = new EventEmitter<Team>();
+  @Output() public onEdit = new EventEmitter<Team>();
 
   onDeleteSelect(team) {
-    this.onDelete.emit(team.name);
+    console.log('delete ' + team.name);
+    this.onDelete.emit(team);
   }
 
   constructor() { }
@@ -24,6 +26,7 @@ export class TeamComponent implements OnInit {
   }
 
   onEditSelect(team) {
+    this.onEdit.emit(team);
     console.log('edit ' + team.name);
   }
 }
