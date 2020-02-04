@@ -12,7 +12,7 @@ import { Country } from 'src/app/shared/model/country.enum';
 import { Player } from 'src/app/shared/model/player/player';
 import { By } from '@angular/platform-browser';
 
-describe('TeamComponent', () => {
+describe('TeamHostComponent', () => {
   let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
@@ -43,27 +43,73 @@ describe('TeamComponent', () => {
     expect(subtitleElement.textContent).toEqual(expectedTeam.city);
   });
 
+});
+
+describe('TeamComponent', () => {
+  let component: TeamComponent;
+  let fixture: ComponentFixture<TeamComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [TeamComponent],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+      imports: [CommonModule,
+        SharedModule,
+        MatCardModule, MatButtonModule, MatIconModule
+      ]
+    })
+      .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TeamComponent);
+    component = fixture.componentInstance;
+    component.team = {
+      id: 1,
+      name: "1stTeam",
+      players: [{
+        id: 1,
+        name: "1stPlayer",
+        position: Position.defender,
+        number: 78,
+        born: new Date(),
+        height: 180,
+        weight: 90,
+        age: 36,
+        shoots: Shoots.left,
+        country: Country.by,
+        stats: []
+      }],
+      score: 12,
+      city: "Hrodna",
+      description: "The oldest team"
+    };
+    fixture.detectChanges();
+  });
+
   it('should bind team component deleted name event', () => {
-    const deleteButton = fixture.debugElement.query(By.css('.delete-button'));
+    spyOn(component.onDelete, 'emit');
+    const deleteButton = fixture.debugElement.query(By.css('#deleteBtn'));
+    console.warn(deleteButton)
     deleteButton.triggerEventHandler('click', null);
     fixture.detectChanges();
-    expect(component.onDelete(component.team));
-    
+    expect(component.onDelete.emit).toHaveBeenCalledWith(component.team);
   });
 });
 
 @Component({
-  template: `<div> 
-    <mat-card class="team-card">
+  template:
+    `<div>
+  <mat-card class="team-card">
     <mat-card-header>
       <div mat-card-avatar class="team-header-image"></div>
       <mat-card-title>{{team.name}}</mat-card-title>
       <mat-card-subtitle>{{team.city}}</mat-card-subtitle>
     </mat-card-header>
     </mat-card>
-    <app-player *ngFor="let player of team.players" [player]="player"></app-player>   
-   <button class="delete-button" [team]="team" (deletedName) = "onDelete($event)"></button>
-    </div>`
+  <app-player *ngFor="let player of team.players" [player]="player">
+    </app-player>
+</div>`
 })
 class TestHostComponent {
   public team: Team = {
@@ -74,7 +120,6 @@ class TestHostComponent {
     city: "Hrodna",
     description: "The oldest team"
   };
-
   public players(): Player[] {
     return [{
       id: 1,
@@ -90,11 +135,4 @@ class TestHostComponent {
       stats: []
     }]
   };
-  public deletedName: string;
-
-  public onDelete(team: Team): void {
-    this.deletedName = team.name;
-  }
 }
-
-

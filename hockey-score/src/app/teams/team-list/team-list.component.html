@@ -5,7 +5,8 @@
 <mat-divider></mat-divider>
 
 <div>
-    <app-team *ngFor="let team of teams" [team]="team" (onDelete)="onDeleteClicked($event)">
+    <app-team *ngFor="let team of teams" [team]="team" (onDelete)="onDeleteClicked($event)"
+        (onEdit)="onEditClicked($event)">
         <mat-divider></mat-divider>
     </app-team>
 </div>
