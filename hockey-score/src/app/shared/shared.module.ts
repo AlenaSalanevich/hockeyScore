@@ -25,12 +25,13 @@ import { RouterModule } from '@angular/router';
 import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { OderByPipe } from './pipes/oder-by.pipe';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent, SearchComponent, LoginComponent],
-  exports: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent, SearchComponent],
+  declarations: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent, SearchComponent, LoginComponent, OderByPipe],
+  exports: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent, SearchComponent, OderByPipe],
   imports: [
     CommonModule,
     MatButtonModule,

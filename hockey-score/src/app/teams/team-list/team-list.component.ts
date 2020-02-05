@@ -37,4 +37,8 @@ export class TeamListComponent implements OnInit {
   public isLogged(): boolean {
     return this.isLogin;
   }
+
+  public teamScore(team: Team): number {
+    return team.score;
+  }
 }
