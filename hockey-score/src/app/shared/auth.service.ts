@@ -11,6 +11,8 @@ export class AuthService {
 
   private admin: Login = new Login("admin", "admin");
 
+  private currentUser: Login;
+
   constructor() {
     this._isLogin = new BehaviorSubject(false);
 
@@ -19,6 +21,7 @@ export class AuthService {
   login(userCredentials: Login) {
     if (userCredentials.login === this.admin.login && userCredentials.password === this.admin.password) {
       this._isLogin.next(true);
+      this.currentUser = userCredentials;
     }
     else {
       this._isLogin.next(false);
@@ -36,5 +39,9 @@ export class AuthService {
    */
   get isLogin() {
     return this._isLogin;
+  }
+
+  getUserInfo(): Login {
+    return this.currentUser;
   }
 }

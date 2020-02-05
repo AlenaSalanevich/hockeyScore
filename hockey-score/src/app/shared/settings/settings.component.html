@@ -1,0 +1,16 @@
+<mat-card class="team-card">
+    <mat-card-header>
+        <div mat-card-avatar class="team-header-image"></div>
+        <mat-card-title>Setting Info</mat-card-title>
+        <mat-card-subtitle>Current user</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content *ngIf="currentUser">
+        <p>{{currentUser.login}}</p>
+        <p>{{currentUser.password}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button class="add-team-button" type="submit" mat-raised-button color="primary"
+                    (click)="redirectToHome()"> Cancel
+                </button>
+    </mat-card-actions>
+</mat-card>
