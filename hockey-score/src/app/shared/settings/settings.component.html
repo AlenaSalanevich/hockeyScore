@@ -1,10 +1,10 @@
-<mat-card class="team-card">
+<mat-card class="team-card" *ngIf="currentUser">
     <mat-card-header>
         <div mat-card-avatar class="team-header-image"></div>
         <mat-card-title>Setting Info</mat-card-title>
         <mat-card-subtitle>Current user</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content *ngIf="currentUser">
+    <mat-card-content >
         <p>{{currentUser.login}}</p>
         <p>{{currentUser.password}}</p>
     </mat-card-content>

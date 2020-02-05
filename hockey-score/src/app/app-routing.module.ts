@@ -6,9 +6,11 @@ import { HomeComponent } from './shared/home/home.component';
 import { LoginComponent } from './shared/login/login.component';
 import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { SettingsComponent } from './shared/settings/settings.component';
+import { GameListComponent } from './games/game-list/game-list.component';
 
 export const routes: Routes = [
   { path: 'teams', component: TeamListComponent },
+  { path: 'games', component: GameListComponent },
   { path: 'players', component: PlayerListComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'home', component: HomeComponent },

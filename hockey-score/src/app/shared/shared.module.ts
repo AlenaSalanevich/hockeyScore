@@ -28,11 +28,22 @@ import { LoginComponent } from './login/login.component';
 import { OderByPipe } from './pipes/oder-by.pipe';
 import { SettingsComponent } from './settings/settings.component';
 
-
-
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent, SearchComponent, LoginComponent, OderByPipe, SettingsComponent],
-  exports: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent, SearchComponent, OderByPipe, SettingsComponent],
+  declarations: [HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    LogoComponent,
+    SearchComponent,
+    LoginComponent,
+    OderByPipe,
+    SettingsComponent],
+  exports: [HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    LogoComponent,
+    SearchComponent,
+    OderByPipe,
+    SettingsComponent],
   imports: [
     CommonModule,
     MatButtonModule,

@@ -12,6 +12,7 @@ import { TeamsModule } from './teams/teams.module';
 import { PlayersModule } from './players/players.module';
 import { Router, RouterModule } from '@angular/router';
 import { AddTeamComponent } from './teams/add-team/add-team.component';
+import { GamesModule } from './games/games.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AddTeamComponent } from './teams/add-team/add-team.component';
     SharedModule,
     TeamsModule,
     PlayersModule,
-    AppRoutingModule
+    AppRoutingModule,
+    GamesModule
   ],
   providers: [],
   bootstrap: [AppComponent],
