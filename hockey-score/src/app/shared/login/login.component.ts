@@ -29,12 +29,6 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/home')
   }
 
- /*  onLoginSelect() {
-    const isLogin: boolean = true;
-    console.log('click onLoginSelect, emit ' + isLogin);
-    this.onLogin.emit(isLogin);
-  } */
-
   ngOnInit() {
     this.login = new Login('', '');
     this.error = '';

@@ -10,14 +10,14 @@ import { EventEmitter } from '@angular/core';
 export class TeamComponent implements OnInit {
 
   @Input() public team: Team;
+  @Input() public isLogged: boolean;
 
   @Output() public onDelete = new EventEmitter<Team>();
   @Output() public onEdit = new EventEmitter<Team>();
 
-  onDeleteSelect(team) {
-    console.log('delete ' + team.name);
-    this.onDelete.emit(team);
-  }
+  public deleteSelectedTeam: Team;
+
+  public editSelectedTeam: Team;
 
   constructor() { }
   columnsToDisplay = ['number', 'name', 'position', 'country', 'age', 'shoots', 'height', 'weight'];
@@ -28,5 +28,18 @@ export class TeamComponent implements OnInit {
   onEditSelect(team) {
     this.onEdit.emit(team);
     console.log('edit ' + team.name);
+  }
+
+  onDeleteSelect(team) {
+    console.log('delete ' + team.name);
+    this.onDelete.emit(team);
+  }
+
+  public onEditClick(team: Team): void {
+    this.editSelectedTeam = team;
+  }
+
+  public onDeleteClick(team: Team): void {
+    this.deleteSelectedTeam = team;
   }
 }

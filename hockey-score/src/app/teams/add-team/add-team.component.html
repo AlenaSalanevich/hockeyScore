@@ -1,0 +1,38 @@
+<div class="add-team-form-container">
+    <div class="add-team-form">
+        <form class="add-team-data-form mat-elevation-z2" (ngSubmit)="tryCreatTeam()" #createForm="ngForm">
+            <div class="add-team-text-container">
+                <h2 class="add-team-page-title">Add new team</h2>
+            </div>
+            <mat-input-container class="add-team-data-row">
+                <input matInput placeholder="Id of team" id="id" required [(ngModel)]="team.id" name="id"
+                    #name="ngModel">
+            </mat-input-container>
+            <mat-input-container class="add-team-data-row">
+                <input matInput placeholder="Name of team" id="name" required  [(ngModel)]="team.name" name="name" #name="ngModel">
+            </mat-input-container>
+            <mat-input-container class="add-team-data-row">
+                <input matInput placeholder="Description of team" id="description" [(ngModel)]="team.description"
+                    name="description" #description="ngModel">
+            </mat-input-container>
+            <mat-input-container class="add-team-data-row">
+                <input matInput placeholder="City of team" id="city" [(ngModel)]="team.city" name="city"
+                    #name="ngModel">
+            </mat-input-container>
+
+            <mat-input-container class="add-team-data-row">
+                <input matInput placeholder="Score of team" id="score" required [(ngModel)]="team.score" name="score"
+                    #name="ngModel">
+            </mat-input-container>
+
+            <div class="add-team-buttons">
+                <button class="add-team-button" type="submit" mat-raised-button color="primary"
+                    [disabled]="!createForm.form.valid"> Add team
+                </button>
+                <button class="add-team-button" type="submit" mat-raised-button color="primary"
+                    (click)="redirectToTeams()"> Cancel
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -12,6 +12,7 @@ import { TeamsModule } from './teams/teams.module';
 import { PlayersModule } from './players/players.module';
 import { Router, RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
+import { AddTeamComponent } from './teams/add-team/add-team.component';
 
 @NgModule({
   declarations: [
