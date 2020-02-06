@@ -14,7 +14,7 @@ export class TeamService {
 
   private teams: Team[] = [{
     id: 1,
-    name: "Kronon",
+    name: "HC Kronon",
     players: [],
     score: 12,
     city: "Hrodna",
@@ -22,10 +22,42 @@ export class TeamService {
   },
   {
     id: 2,
-    name: "Avangard",
+    name: "HC Avangard",
+    players: [],
+    score: 9,
+    city: "Hrodna",
+    description: "The oldest team"
+  },
+  {
+    id: 3,
+    name: "HC Neman",
+    players: [],
+    score: 7,
+    city: "Homel",
+    description: "The oldest team"
+  },
+  {
+    id: 4,
+    name: "HC Metalurg",
+    players: [],
+    score: 3,
+    city: "Minsk",
+    description: "The oldest team"
+  },
+  {
+    id: 5,
+    name: "HC Dinamo",
     players: [],
     score: 1,
-    city: "Hrodna",
+    city: "Brest",
+    description: "The oldest team"
+  },
+  {
+    id: 6,
+    name: "HC Lida",
+    players: [],
+    score: 15,
+    city: "Lida",
     description: "The oldest team"
   }
   ];

@@ -11,6 +11,7 @@ export class TeamComponent implements OnInit {
 
   @Input() public team: Team;
   @Input() public isLogged: boolean;
+  public static minRateLevel: number = 10;
 
   @Output() public onDelete = new EventEmitter<Team>();
   @Output() public onEdit = new EventEmitter<Team>();

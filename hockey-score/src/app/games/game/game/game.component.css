@@ -1,17 +1,6 @@
-.mat-card-game {
-    font-size: large;  
-     font-weight: bold;
-    color:#3f51b5;
-    margin-bottom: 4%;
-    border:5px solid  #3f51b5;
-    margin-top: 4%;
-  }
-
-  .game-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
-  
-  .game-result{
-    font-size: xx-large;
-  }
+  .game-content {
+    padding:15px;
+    margin-top: 15px;
+    background-color:silver;
+    border-style: solid;
+}

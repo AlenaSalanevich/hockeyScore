@@ -17,8 +17,8 @@ export class GameComponent implements OnInit {
   }
 
 
-  getDate(game): any{
+  getDate(game): any {
     return new FormControl(game.date);
   }
 
-  }
+}
