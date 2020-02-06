@@ -1,4 +1,4 @@
-<div>
-    <app-game *ngFor="let game of games | oderBy: getDate" [game]="game">
+<div class = "game-list">
+    <app-game *ngFor="let game of games | oderBy: gameDate" [game]="game">
     </app-game>
 </div>

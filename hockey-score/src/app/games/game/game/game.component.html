@@ -1,1 +1,27 @@
-<p>game works!</p>
+<mat-card class="game-card">
+    <mat-card-header>
+        <div mat-card-avatar class="game-header-image"></div>
+        <mat-card-title>
+            {{game.homeTeam.name}} : {{game.hostTeam.name}}
+        </mat-card-title>
+        <div mat-card-avatar class="game-header-image"></div>
+        <mat-card-subtitle>
+            {{game.date}}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        {{game.result.homeTeamScore}} : {{game.result.hostTeamScore}}
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-icon-button class="mat-icon-button-card-actions" (click)="onDeleteClick(game); editSelected =null">
+            <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">delete</i>
+            </mat-icon>
+        </button>
+        <button mat-icon-button class="mat-icon-button-card-actions" (click)="onEditClick(game); deleteSelected=null">
+            <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">mode_edit</i>
+            </mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>
+
+<!-- appDateBorder [byDate]="game.date" [ngClass]="{'top-rated': game.topRated}" -->

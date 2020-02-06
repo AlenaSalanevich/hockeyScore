@@ -15,9 +15,4 @@ export class GameComponent implements OnInit {
   ngOnInit() {
   }
 
-  getDate(game: Game): number{
-     
-    return game.date.getTime();
   }
-
-}
