@@ -1,4 +1,5 @@
-<mat-card class="game-card">
+<div appDateBorder [byDate]="game.date">
+<mat-card>
     <mat-card-header>
         <div mat-card-avatar class="game-header-image"></div>
         <mat-card-title>
@@ -6,7 +7,12 @@
         </mat-card-title>
         <div mat-card-avatar class="game-header-image"></div>
         <mat-card-subtitle>
-            {{game.date}}
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" [value]="getDate.value" disabled>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              {{game.date}}
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -23,5 +29,6 @@
         </button>
     </mat-card-actions>
 </mat-card>
+</div>
 
 <!-- appDateBorder [byDate]="game.date" [ngClass]="{'top-rated': game.topRated}" -->

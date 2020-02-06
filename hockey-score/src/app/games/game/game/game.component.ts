@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Game } from 'src/app/shared/model/game/game';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-game',
@@ -13,6 +14,11 @@ export class GameComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+
+  getDate(game): any{
+    return new FormControl(game.date);
   }
 
   }

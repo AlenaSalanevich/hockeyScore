@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { OderByPipe } from './pipes/oder-by.pipe';
 import { SettingsComponent } from './settings/settings.component';
+import { DateBorderdDirective } from './directive/date-borderd.directive';
 
 @NgModule({
   declarations: [HeaderComponent,
@@ -36,7 +37,8 @@ import { SettingsComponent } from './settings/settings.component';
     SearchComponent,
     LoginComponent,
     OderByPipe,
-    SettingsComponent],
+    SettingsComponent,
+    DateBorderdDirective],
   exports: [HeaderComponent,
     FooterComponent,
     HomeComponent,
