@@ -7,4 +7,5 @@ export class Game extends BaseEntity {
     hostTeam: Team;
     result: Result;
     date: Date;
+    duration: number;
 }

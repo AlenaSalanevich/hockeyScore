@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TeamService } from '../teams/team.service';
 import { Game } from '../shared/model/game/game';
+import { duration } from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,9 @@ export class GameService {
       result: {
         homeTeamScore: 0,
         hostTeamScore: 0
-      }
-    },
+      },
+      duration:0,
+    }, 
     {
       id: 11,
       homeTeam: this.teamService.getTeam(1),
@@ -28,7 +30,8 @@ export class GameService {
       result: {
         homeTeamScore: 0,
         hostTeamScore: 0
-      }
+      },
+      duration:0,
     },
     {
       id: 22,
@@ -38,7 +41,7 @@ export class GameService {
       result: {
         homeTeamScore: 2,
         hostTeamScore: 1
-      }
+      }, duration:0,
     },
     {
       id: 33,
@@ -48,7 +51,7 @@ export class GameService {
       result: {
         homeTeamScore: 3,
         hostTeamScore: 3
-      }
+      }, duration:0,
     },
     {
       id: 44,
@@ -58,7 +61,7 @@ export class GameService {
       result: {
         homeTeamScore: 5,
         hostTeamScore: 3
-      }
+      }, duration:0,
     },
     {
       id: 55,
@@ -68,7 +71,7 @@ export class GameService {
       result: {
         homeTeamScore: 0,
         hostTeamScore: 0
-      }
+      }, duration:0,
     }]
   }
 }

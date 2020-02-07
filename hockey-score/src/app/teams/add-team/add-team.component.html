@@ -9,7 +9,8 @@
                     #name="ngModel">
             </mat-input-container>
             <mat-input-container class="add-team-data-row">
-                <input matInput placeholder="Name of team" id="name" required  [(ngModel)]="team.name" name="name" #name="ngModel">
+                <input matInput placeholder="Name of team" id="name" required [(ngModel)]="team.name" name="name"
+                    #name="ngModel">
             </mat-input-container>
             <mat-input-container class="add-team-data-row">
                 <input matInput placeholder="Description of team" id="description" [(ngModel)]="team.description"
@@ -23,6 +24,23 @@
             <mat-input-container class="add-team-data-row">
                 <input matInput placeholder="Score of team" id="score" required [(ngModel)]="team.score" name="score"
                     #name="ngModel">
+            </mat-input-container>
+
+            <mat-input-container class="add-team-data-row">
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Select players
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-selection-list #name="ngModel" [(ngModel)]="selectedPlayerNames" name="selectedPlayerNames">
+                        <mat-list-option *ngFor="let pls of playerNames" [value]="pls">
+                          {{pls}}
+                        </mat-list-option>
+                        <p>Summary:{{selectedPlayerNames|json}}</p>
+                        <p>Qnty:{{selectedPlayerNames.length}}</p>
+                      </mat-selection-list>               
+                  </mat-expansion-panel>
             </mat-input-container>
 
             <div class="add-team-buttons">

@@ -3,6 +3,7 @@ import { Team } from '../shared/model/team/team';
 import { PlayerService } from '../players/player.service';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -68,9 +69,10 @@ export class TeamService {
   }
 
   getTeams(): Team[] {
-    this.teams.forEach(t => t.players = this.playerService.getPlayers());
-    this._actualTeams.next(this.teams);
-    return this.teams;
+    let clone: Team[] = [...this.teams];
+    clone.forEach(t => t.players = this.playerService.getPlayers());
+    this._actualTeams.next(clone);
+    return clone;
   }
 
   getTeam(id: number): Team {
@@ -78,34 +80,44 @@ export class TeamService {
   }
 
   createTeam(team: Team) {
+    let clone: Team[] = [...this.teams];
+    clone.forEach(t => t.players = this.playerService.getPlayers());
     console.log("add team" + team.name)
-    if (this.teams.find(t => t.id === team.id) != null) {
+    if (clone.find(t => t.id === team.id) != null) {
       this.updateTeam(team);
     }
     else {
-      this.teams.push(team);
-      this.teams.forEach(t => console.log(t.name));
-    }
-    this._actualTeams.next(this.teams);
+      clone.push(team);
+      clone.forEach(t => console.log("from teamservice create new team:" + t.name));
+      this._actualTeams.next(clone);
+    } 
   }
 
   updateTeam(team: Team) {
-    let updated = this.teams.find(t => t.id === team.id);
-    const index: number = this.teams.indexOf(this.teams.find(t => t.id === team.id));
-    this.teams.splice(index, 1);
+    console.log("from teamservice update new team:" + team.name)
+    let clone: Team[] = [...this.teams];
+    clone.forEach(t => t.players = this.playerService.getPlayers());
+    let updated = clone.find(t => t.id === team.id);
+    const index: number = clone.indexOf(updated);
+    clone.splice(index, 1);
     updated.name = team.name;
     updated.score = team.score;
     updated.description = team.description;
     updated.city = team.city;
-    this.teams.push(updated);
+    clone.push(updated);
+    this._actualTeams.next(clone);
+    clone.forEach(t => console.log("from teamservice update team:" + t.name));
   }
 
   deleteTeam(id: number) {
-    const index: number = this.teams.indexOf(this.teams.find(t => t.id === id));
-    this.teams.splice(index, 1);
+    let clone: Team[] = [...this.teams];
+    clone.forEach(t => t.players = this.playerService.getPlayers());
+    const index: number = clone.indexOf(clone.find(t => t.id === id));
+    clone.splice(index, 1);
+    this._actualTeams.next(clone);
   }
 
-  public get actualTeams() {
+  public get actualTeams(): BehaviorSubject<Team[]> {
     return this._actualTeams;
   }
 }

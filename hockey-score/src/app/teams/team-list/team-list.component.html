@@ -4,7 +4,7 @@
 </button>
 <mat-divider></mat-divider>
 <p *ngIf="!teams.length && isLogged()">No teams, feel free to add new one!</p>
-<div>
+<div  class= "team-list">
     <app-team *ngFor="let team of teams | oderBy: teamScore" [team]="team"
         (onDelete)="onDeleteClicked($event)" (onEdit)="onEditClicked($event)" [isLogged]="isLogged">
     </app-team>

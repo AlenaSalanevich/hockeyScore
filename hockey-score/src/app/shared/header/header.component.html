@@ -35,4 +35,7 @@
   <button mat-button class="m-toolbar-button" *ngIf="isLogin" (click)="logout()">
     <mat-icon><i class="material-icons">lock_open</i></mat-icon>
   </button>
+  <button mat-button class="m-toolbar-button" *ngIf="isLogin">
+    <mat-icon><i class="material-icons">perm_identity</i></mat-icon>{{currentUser.login}}
+  </button>
 </mat-toolbar>
