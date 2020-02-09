@@ -1,32 +1,32 @@
 <div class="row game-content" appDateBorder [byDate]="game">
-<mat-card>
-    <mat-card-header>
-        <div mat-card-avatar class="game-header-image"></div>
-        <mat-card-title>
-            {{game.homeTeam.name}} : {{game.hostTeam.name}}
-        </mat-card-title>
-        <div mat-card-avatar class="game-header-image"></div>
-        <mat-card-subtitle>
-            <mat-form-field>
-                <input matInput [matDatepicker]="picker" [value]="getDate.value" disabled>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-              {{game.date}}
-        </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        {{game.result.homeTeamScore}} : {{game.result.hostTeamScore}}
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-icon-button class="mat-icon-button-card-actions" (click)="onDeleteClick(game); editSelected =null">
-            <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">delete</i>
-            </mat-icon>
-        </button>
-        <button mat-icon-button class="mat-icon-button-card-actions" (click)="onEditClick(game); deleteSelected=null">
-            <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">mode_edit</i>
-            </mat-icon>
-        </button>
-    </mat-card-actions>
-</mat-card>
+    <mat-card [ngStyle]="{'display': 'block', 'text-align': 'center'}">
+        <mat-card-header>
+            <div mat-card-avatar class="game-header-image"></div>
+            <mat-card-title class="game-header">
+                {{game.homeTeam.name}} : {{game.hostTeam.name}}
+            </mat-card-title>
+            <div mat-card-avatar class="game-header-image"></div>
+            <mat-card-subtitle>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" [value]="getDate.value" disabled hidden="true">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                {{game.date | date:'HH:mm yyyy MM dd' }}
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content [ngStyle]="{'background-color':'white', 'font-size': '86px', 'text-align': 'center', 'display':'flow-root'}">
+            {{game.result.homeTeamScore}} : {{game.result.hostTeamScore}}
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-icon-button class="mat-icon-button-card-actions">
+                <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">delete</i>
+                </mat-icon>
+            </button>
+            <button mat-icon-button class="mat-icon-button-card-actions">
+                <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">mode_edit</i>
+                </mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
 </div>

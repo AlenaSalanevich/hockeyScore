@@ -13,6 +13,7 @@ import { PlayersModule } from './players/players.module';
 import { Router, RouterModule } from '@angular/router';
 import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { GamesModule } from './games/games.module';
+import { DatePipe, JsonPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { GamesModule } from './games/games.module';
     AppRoutingModule,
     GamesModule
   ],
-  providers: [],
+  providers: [DatePipe, JsonPipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

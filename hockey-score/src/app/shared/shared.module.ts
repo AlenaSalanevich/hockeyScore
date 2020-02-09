@@ -29,6 +29,7 @@ import { OderByPipe } from './pipes/oder-by.pipe';
 import { SettingsComponent } from './settings/settings.component';
 import { DateBorderDirective } from './directive/date-border.directive';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [HeaderComponent,
@@ -40,7 +41,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     OderByPipe,
     SettingsComponent,
     DateBorderDirective,
-    BreadcrumbComponent],
+    BreadcrumbComponent,
+    NotfoundComponent],
   exports: [HeaderComponent,
     FooterComponent,
     HomeComponent,
@@ -48,7 +50,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     SearchComponent,
     OderByPipe,
     SettingsComponent,
-    DateBorderDirective, BreadcrumbComponent],
+    DateBorderDirective, BreadcrumbComponent, NotfoundComponent],
   imports: [
     CommonModule,
     MatButtonModule,

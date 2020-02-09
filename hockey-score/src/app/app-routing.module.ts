@@ -7,9 +7,14 @@ import { LoginComponent } from './shared/login/login.component';
 import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { SettingsComponent } from './shared/settings/settings.component';
 import { GameListComponent } from './games/game-list/game-list.component';
+import { NotfoundComponent } from './shared/notfound/notfound.component';
 
 export const routes: Routes = [
-  { path: 'teams', component: TeamListComponent },
+  {
+    path: 'teams', component: TeamListComponent
+    /*    , children: [{ path: 'add', component: AddTeamComponent }] */
+  },
+  { path: 'teams/add', component: AddTeamComponent },
   { path: 'games', component: GameListComponent },
   { path: 'players', component: PlayerListComponent },
   { path: 'settings', component: SettingsComponent },
@@ -17,7 +22,8 @@ export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'logout', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'addteam', component: AddTeamComponent }];
+  { path: '**', component: NotfoundComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
