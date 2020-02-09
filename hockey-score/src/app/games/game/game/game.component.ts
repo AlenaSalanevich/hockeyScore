@@ -16,7 +16,6 @@ export class GameComponent implements OnInit {
   ngOnInit() {
   }
 
-
   getDate(game): any {
     return new FormControl(game.date);
   }

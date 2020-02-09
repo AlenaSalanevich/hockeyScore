@@ -14,8 +14,12 @@
                 </mat-form-field>
                 {{game.date | date:'HH:mm yyyy MM dd' }}
             </mat-card-subtitle>
+            <mat-card-subtitle>
+               Game duration: {{game.duration | duaration}}
+            </mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content [ngStyle]="{'background-color':'white', 'font-size': '86px', 'text-align': 'center', 'display':'flow-root'}">
+        <mat-card-content
+            [ngStyle]="{'background-color':'white', 'font-size': '86px', 'text-align': 'center', 'display':'flow-root'}">
             {{game.result.homeTeamScore}} : {{game.result.hostTeamScore}}
         </mat-card-content>
         <mat-card-actions>

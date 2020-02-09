@@ -41,7 +41,7 @@ export class GameService {
       result: {
         homeTeamScore: 2,
         hostTeamScore: 1
-      }, duration:0,
+      }, duration:690,
     },
     {
       id: 33,
@@ -51,7 +51,7 @@ export class GameService {
       result: {
         homeTeamScore: 3,
         hostTeamScore: 3
-      }, duration:0,
+      }, duration:500,
     },
     {
       id: 44,
@@ -61,7 +61,7 @@ export class GameService {
       result: {
         homeTeamScore: 5,
         hostTeamScore: 3
-      }, duration:0,
+      }, duration:370,
     },
     {
       id: 55,

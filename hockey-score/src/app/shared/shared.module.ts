@@ -30,6 +30,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { DateBorderDirective } from './directive/date-border.directive';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { DurationPipe } from './pipes/duration.pipe';
 
 @NgModule({
   declarations: [HeaderComponent,
@@ -42,7 +43,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     SettingsComponent,
     DateBorderDirective,
     BreadcrumbComponent,
-    NotfoundComponent],
+    NotfoundComponent,
+    DurationPipe],
   exports: [HeaderComponent,
     FooterComponent,
     HomeComponent,
@@ -50,7 +52,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     SearchComponent,
     OderByPipe,
     SettingsComponent,
-    DateBorderDirective, BreadcrumbComponent, NotfoundComponent],
+    DateBorderDirective, BreadcrumbComponent, NotfoundComponent, DurationPipe],
   imports: [
     CommonModule,
     MatButtonModule,
