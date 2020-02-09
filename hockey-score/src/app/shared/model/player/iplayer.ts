@@ -3,7 +3,6 @@ import { Country } from '../country.enum';
 import { Position } from '../position.enum';
 
 export interface Iplayer {
-    id: number;
     name: string;
     position: Position;
     number: number;

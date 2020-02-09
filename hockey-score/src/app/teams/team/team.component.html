@@ -1,7 +1,8 @@
-<mat-card class="team-card">
+<mat-card class="team-card" [ngClass]="{'top-rated': team.score > 10}">
   <mat-card-header>
     <div mat-card-avatar class="team-header-image"></div>
-    <mat-card-title>{{team.name}}</mat-card-title>
+    <mat-card-title>{{team.score}}</mat-card-title>
+    <mat-card-title>{{team?.name | uppercase}}</mat-card-title>
     <mat-card-subtitle>{{team.city}}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo">
@@ -9,28 +10,63 @@
     <p>
       {{team.description}}
     </p>
-     <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Players
-            </mat-panel-title>
-            <mat-panel-description>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <app-player *ngFor="let player of team.players" [player]="player"></app-player>
-        </mat-expansion-panel>
-      </mat-accordion>
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Players
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-player *ngFor="let player of team.players" [player]="player"></app-player>
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-card-content>
-  <mat-card-actions> 
-      <button mat-icon-button class="mat-icon-button-card-actions">
-        <mat-icon><i class="material-icons md-24 blue" aria-hidden="false" (click)="onDeleteSelect(team)">delete</i>
-        </mat-icon>
-      </button>
-      <button mat-icon-button class="mat-icon-button-card-actions">
-        <mat-icon><i class="material-icons md-24 blue" aria-hidden="false" (click)="onEditSelect(team)">mode_edit</i>
-        </mat-icon>
-      </button>
-    </mat-card-actions>
+  <mat-card-actions>
+    <button mat-icon-button class="mat-icon-button-card-actions" (click)="onDeleteClick(team); editSelectedTeam =null"
+      *ngIf="isLogged">
+      <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">delete</i>
+      </mat-icon>
+    </button>
+    <button mat-icon-button class="mat-icon-button-card-actions" (click)="onEditClick(team); deleteSelectedTeam=null"
+      *ngIf="isLogged">
+      <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">mode_edit</i>
+      </mat-icon>
+    </button>
+  </mat-card-actions>
 </mat-card>
-<ng-content></ng-content>
+
+<form class="delete-data-form mat-elevation-z2" *ngIf="editSelectedTeam" #createForm="ngForm">
+  <h2> DETAILS: {{ editSelectedTeam.name | uppercase }} </h2>
+  <mat-input-container class="add-team-data-row">
+    <input matInput placeholder="The team name" id="name" required [(ngModel)]="team.name" name="name" #name="ngModel">
+  </mat-input-container>
+  <mat-input-container class="add-team-data-row">
+    <input matInput placeholder="The team description" id="description" required [(ngModel)]="team.description"
+      name="description" #name="ngModel">
+  </mat-input-container>
+  <mat-input-container class="add-team-data-row">
+    <input matInput placeholder="The team city" id="city" required [(ngModel)]="team.city" name="city" #name="ngModel">
+  </mat-input-container>
+  <mat-input-container class="add-team-data-row">
+    <input matInput placeholder="The team score" id="score" required [(ngModel)]="team.score" name="score"
+      #name="ngModel">
+  </mat-input-container>
+  <button class="delete-team-button" type="submit" mat-raised-button color="primary" [disabled]="!createForm.form.valid"
+    (click)="onEditSelect(team);!onEditClick()" id="editBtn"> Update point
+  </button>
+  <button class="delete-team-button" type="submit" mat-raised-button color="primary" (click)="!onEditClick()"> Cancel
+  </button>
+</form>
+
+
+<form class="delete-data-form mat-elevation-z2" *ngIf="deleteSelectedTeam">
+  <h2>DELETE: {{ deleteSelectedTeam.name | uppercase }} </h2>
+  <p> Are you sure to delete this team?</p>
+  <button class="delete-team-button" type="submit" mat-raised-button color="primary"
+    (click)="onDeleteSelect(team); !onDeleteClick()" id="deleteBtn"> Delete point
+  </button>
+  <button class="delete-team-button" type="submit" mat-raised-button color="primary" (click)="!onDeleteClick()"> Cancel
+  </button>
+</form>

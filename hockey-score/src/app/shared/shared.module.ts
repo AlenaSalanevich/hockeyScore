@@ -25,12 +25,34 @@ import { RouterModule } from '@angular/router';
 import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-
-
+import { OderByPipe } from './pipes/oder-by.pipe';
+import { SettingsComponent } from './settings/settings.component';
+import { DateBorderDirective } from './directive/date-border.directive';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { DurationPipe } from './pipes/duration.pipe';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent, SearchComponent, LoginComponent],
-  exports: [HeaderComponent, FooterComponent, HomeComponent, LogoComponent, SearchComponent],
+  declarations: [HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    LogoComponent,
+    SearchComponent,
+    LoginComponent,
+    OderByPipe,
+    SettingsComponent,
+    DateBorderDirective,
+    BreadcrumbComponent,
+    NotfoundComponent,
+    DurationPipe],
+  exports: [HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+    LogoComponent,
+    SearchComponent,
+    OderByPipe,
+    SettingsComponent,
+    DateBorderDirective, BreadcrumbComponent, NotfoundComponent, DurationPipe],
   imports: [
     CommonModule,
     MatButtonModule,

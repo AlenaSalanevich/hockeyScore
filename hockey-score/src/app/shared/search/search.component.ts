@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  private likeChars: string;
+  public likeChars: string;
 
   constructor() { }
 

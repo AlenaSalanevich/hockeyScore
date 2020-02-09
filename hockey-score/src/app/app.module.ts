@@ -11,7 +11,9 @@ import { SharedModule } from './shared/shared.module';
 import { TeamsModule } from './teams/teams.module';
 import { PlayersModule } from './players/players.module';
 import { Router, RouterModule } from '@angular/router';
-import { ROUTES } from './app.routes';
+import { AddTeamComponent } from './teams/add-team/add-team.component';
+import { GamesModule } from './games/games.module';
+import { DatePipe, JsonPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,10 @@ import { ROUTES } from './app.routes';
     SharedModule,
     TeamsModule,
     PlayersModule,
-    RouterModule.forRoot(ROUTES)
+    AppRoutingModule,
+    GamesModule
   ],
-  providers: [],
+  providers: [DatePipe, JsonPipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

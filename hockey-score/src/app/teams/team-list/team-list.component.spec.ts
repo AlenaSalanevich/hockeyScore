@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TeamListComponent } from './team-list.component';
+import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TeamListComponent', () => {
   let component: TeamListComponent;
@@ -8,7 +13,13 @@ describe('TeamListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TeamListComponent ]
+      declarations: [ TeamListComponent ],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+      imports: [CommonModule, SharedModule,
+        MatButtonModule,
+        MatIconModule,
+        BrowserAnimationsModule
+      ]
     })
     .compileComponents();
   }));
