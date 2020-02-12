@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit,  OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Login } from '../model/user/login';
 

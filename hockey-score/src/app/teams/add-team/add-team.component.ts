@@ -1,8 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../team.service';
 import { Router } from '@angular/router';
 import { Team } from 'src/app/shared/model/team/team';
-import { TeamListComponent } from '../team-list/team-list.component';
 import { PlayerService } from 'src/app/players/player.service';
 import { Player } from 'src/app/shared/model/player/player';
 import { JsonPipe } from '@angular/common';
@@ -11,8 +10,7 @@ import { JsonPipe } from '@angular/common';
   selector: 'app-add-team',
   templateUrl: './add-team.component.html',
   styleUrls: ['./add-team.component.css'],
-  providers: [TeamService, TeamListComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  providers: [TeamService]
 })
 export class AddTeamComponent implements OnInit {
 
@@ -23,7 +21,7 @@ export class AddTeamComponent implements OnInit {
   public selectedPlayerNames: String[];
 
   constructor(private readonly teamService: TeamService, private readonly playerService: PlayerService,
-    private readonly router: Router, private readonly teamsComponent: TeamListComponent, private readonly jsPipe: JsonPipe) { }
+    private readonly router: Router, private readonly jsPipe: JsonPipe) { }
 
   ngOnInit() {
     this.team = new Team(null, '', null, null, '', '');

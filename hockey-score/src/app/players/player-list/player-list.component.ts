@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Player } from 'src/app/shared/model/player/player';
 import { PlayerService } from '../player.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';

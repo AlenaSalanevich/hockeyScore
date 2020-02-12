@@ -1,10 +1,9 @@
-import { Component, OnInit, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Team } from 'src/app/shared/model/team/team';
 import { TeamService } from '../team.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-team-list',
