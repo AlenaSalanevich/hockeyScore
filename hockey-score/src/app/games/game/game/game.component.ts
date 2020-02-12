@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component,  Input } from '@angular/core';
 import { Game } from 'src/app/shared/model/game/game';
 import { FormControl } from '@angular/forms';
 
@@ -7,14 +7,11 @@ import { FormControl } from '@angular/forms';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
+export class GameComponent {
 
   @Input() public game: Game;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   getDate(game): any {
     return new FormControl(game.date);

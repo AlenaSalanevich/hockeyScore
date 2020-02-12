@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit,  OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Login } from '../model/user/login';
 
@@ -6,7 +6,7 @@ import { Login } from '../model/user/login';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public currentUser: Login;
 
   constructor(private readonly authService: AuthService) {
-    this.isLogin = false;
     this.authService.isLogin.subscribe(result => this.isLogin = result);
     this.authService.getCurrentUser().subscribe(result => this.currentUser = result);
   }

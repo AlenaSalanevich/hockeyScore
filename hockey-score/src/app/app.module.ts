@@ -14,6 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { GamesModule } from './games/games.module';
 import { DatePipe, JsonPipe } from '@angular/common';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { DatePipe, JsonPipe } from '@angular/common';
     AppRoutingModule,
     GamesModule
   ],
-  providers: [DatePipe, JsonPipe],
+  providers: [DatePipe, JsonPipe, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

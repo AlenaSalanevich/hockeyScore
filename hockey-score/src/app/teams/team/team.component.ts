@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { Team } from 'src/app/shared/model/team/team';
 import { EventEmitter } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
@@ -6,9 +6,10 @@ import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
-  styleUrls: ['./team.component.css']
+  styleUrls: ['./team.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TeamComponent implements OnInit {
+export class TeamComponent {
 
   @Input() public team: Team;
   @Input() public isLogged: boolean;
@@ -23,10 +24,7 @@ export class TeamComponent implements OnInit {
 
   constructor() { }
   columnsToDisplay = ['number', 'name', 'position', 'country', 'age', 'shoots', 'height', 'weight'];
-  ngOnInit() {
-
-  }
-
+ 
   onEditSelect(team) {
     this.onEdit.emit(team);
     console.log('edit ' + team.name);

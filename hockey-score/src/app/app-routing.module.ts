@@ -8,13 +8,22 @@ import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { SettingsComponent } from './shared/settings/settings.component';
 import { GameListComponent } from './games/game-list/game-list.component';
 import { NotfoundComponent } from './shared/notfound/notfound.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 export const routes: Routes = [
   {
-    path: 'teams', component: TeamListComponent
-    /*    , children: [{ path: 'add', component: AddTeamComponent }] */
+    path: 'teams',
+    children: [
+      {
+        path: '',
+        component: TeamListComponent
+      },
+      {
+        path: 'add',
+        component: AddTeamComponent, canActivate: [AuthGuard]
+      },
+    ]
   },
-  { path: 'teams/add', component: AddTeamComponent },
   { path: 'games', component: GameListComponent },
   { path: 'players', component: PlayerListComponent },
   { path: 'settings', component: SettingsComponent },
@@ -24,6 +33,7 @@ export const routes: Routes = [
   { path: 'logout', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NotfoundComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
