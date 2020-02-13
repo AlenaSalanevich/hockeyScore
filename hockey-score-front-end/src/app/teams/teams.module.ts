@@ -8,6 +8,7 @@ import { PlayersModule } from '../players/players.module';
 import { AddTeamComponent } from './add-team/add-team.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { OderByPipe } from '../shared/pipes/oder-by.pipe';
 
 
 
@@ -29,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     FormsModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [OderByPipe]
 })
 export class TeamsModule { }

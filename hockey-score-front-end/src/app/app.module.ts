@@ -10,11 +10,10 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { TeamsModule } from './teams/teams.module';
 import { PlayersModule } from './players/players.module';
-import { Router, RouterModule } from '@angular/router';
-import { AddTeamComponent } from './teams/add-team/add-team.component';
 import { GamesModule } from './games/games.module';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +25,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     SharedModule,
     TeamsModule,
     PlayersModule,

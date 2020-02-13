@@ -4,6 +4,8 @@ import { TeamService } from '../team.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-team-list',
@@ -12,30 +14,22 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class TeamListComponent implements OnInit, OnDestroy {
 
-  public teams$: BehaviorSubject<Team[]>;
-  public teams: Team[];
+  public teams$: Observable<Team[]>;
+  public team: Team[] = [];
   public isLogin$: BehaviorSubject<boolean>;
   private isLogin: boolean;
   public authSubscription: Subscription = new Subscription();
-  public teamsSubscription: Subscription = new Subscription();
 
   constructor(readonly teamService: TeamService, private readonly authService: AuthService) {
   }
 
   ngOnInit() {
-    this.teams$ = this.teamService.actualTeams;
-    this.teamsSubscription = this.teams$.subscribe(teams => {
-    this.teams = teams; teams.forEach(t => {
-      console.log("from on init teamName: " + t.name  + ", "+ "teamId: "+ t.id + ", "+ Date.now());
-    });
-    });;
-    this.teamService.getTeams();
+    this.teams$ = this.teamService.getTeams();
     this.isLogin$ = this.authService.isLogin;
     this.authSubscription = this.isLogin$.subscribe(result => this.isLogin = result);
   }
 
   ngOnDestroy(): void {
-    this.teamsSubscription.unsubscribe();
     this.authSubscription.unsubscribe();
   }
 
@@ -57,4 +51,9 @@ export class TeamListComponent implements OnInit, OnDestroy {
   public teamScore(team: Team): number {
     return team.score;
   }
+  isTeamsEmpty(): boolean {
+    return true;
+
+  }
+
 }

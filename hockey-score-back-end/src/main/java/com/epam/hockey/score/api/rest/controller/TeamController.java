@@ -5,11 +5,13 @@ import com.epam.hockey.score.api.model.team.TeamMutableData;
 import com.epam.hockey.score.api.service.TeamService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ResponseHeader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 
 @Api(tags = "Team controller")
@@ -23,38 +25,43 @@ public class TeamController {
     @PostMapping()
     @ApiOperation("Create new team")
     @ResponseBody
-    public Integer create(@RequestBody TeamMutableData data) {
+    public Integer create(@RequestBody TeamMutableData data, @RequestHeader(value = "Access-Control-Allow-Origin", required = false) String header, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         return teamService.create(data);
     }
 
-    @PutMapping(value = "{id}")
+    @PutMapping(value = "/{id}")
     @ApiOperation("Update team by id")
     @ResponseBody
-    public ResponseEntity update(@PathVariable final Integer id, @RequestBody TeamMutableData data) {
+    public ResponseEntity update(@PathVariable final Integer id, @RequestBody TeamMutableData data, @RequestHeader(value = "Access-Control-Allow-Origin", required = false) String header, HttpServletResponse response) {
         teamService.update(id, data);
+        response.setHeader("Access-Control-Allow-Origin", "*");
         return ResponseEntity.ok("Team is updated!");
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation("Delete team by id")
     @ResponseBody
-    public ResponseEntity delete(@PathVariable final Integer id) {
+    public ResponseEntity delete(@PathVariable final Integer id, @RequestHeader(value = "Access-Control-Allow-Origin", required = false) String header, HttpServletResponse response) {
         teamService.delete(id);
-
+        response.setHeader("Access-Control-Allow-Origin", "*");
         return ResponseEntity.ok("Team is deleted!");
     }
 
     @GetMapping("/{id}")
     @ApiOperation("Load team by id")
     @ResponseBody
-    public Team load(@PathVariable final Integer id) {
+    public Team load(@PathVariable final Integer id, @RequestHeader(value = "Access-Control-Allow-Origin", required = false) String header, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         return teamService.get(id);
     }
 
     @GetMapping()
     @ApiOperation("Load all teams")
     @ResponseBody
-    public Collection<Team> get() {
+    @ResponseHeader(name = "Access-Control-Allow-Origin", description = "*")
+    public Collection<Team> get(@RequestHeader(value = "Access-Control-Allow-Origin", required = false) String header, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         return teamService.get();
     }
 }

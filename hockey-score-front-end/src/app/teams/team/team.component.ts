@@ -1,7 +1,7 @@
 import { Component, Input, Output } from '@angular/core';
 import { Team } from 'src/app/shared/model/team/team';
 import { EventEmitter } from '@angular/core';
-import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-team',

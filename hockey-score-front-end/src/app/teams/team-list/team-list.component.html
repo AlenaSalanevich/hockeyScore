@@ -5,12 +5,12 @@
         </button>
     </div>
     <mat-divider></mat-divider>
-    <!--  <div>
-        <p *ngIf="!teams.length && isLogged()">No teams, feel free to add new one!</p>
+     <div>
+        <p *ngIf="!isTeamsEmpty() && isLogged()">No teams, feel free to add new one!</p>
         <div class="team-list">
-            <app-team *ngFor="let team of teams | oderBy: teamScore" [team]="team" (onDelete)="onDeleteClicked($event)"
+            <app-team *ngFor="let team of teams$ | async" [team]="team" (onDelete)="onDeleteClicked($event)"
                 (onEdit)="onEditClicked($event)" [isLogged]="isLogged">
             </app-team>
         </div>
-    </div> -->
+    </div>
 </div>
