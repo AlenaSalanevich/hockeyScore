@@ -16,7 +16,7 @@ import java.util.Collection;
 
 @Api(tags = "Team controller")
 @Controller
-@RequestMapping(path = "/teams")
+@RequestMapping(path = "api/teams")
 public class TeamController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class TeamController {
     @PostMapping()
     @ApiOperation("Create new team")
     @ResponseBody
-    public Integer create(@RequestBody TeamMutableData data, @RequestHeader(value = "Access-Control-Allow-Origin", required = false) String header, HttpServletResponse response) {
+    public Integer create(@RequestBody TeamMutableData data, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         return teamService.create(data);
     }
@@ -33,7 +33,7 @@ public class TeamController {
     @PutMapping(value = "/{id}")
     @ApiOperation("Update team by id")
     @ResponseBody
-    public ResponseEntity update(@PathVariable final Integer id, @RequestBody TeamMutableData data, @RequestHeader(value = "Access-Control-Allow-Origin", required = false) String header, HttpServletResponse response) {
+    public ResponseEntity update(@PathVariable final Integer id, @RequestBody TeamMutableData data, HttpServletResponse response) {
         teamService.update(id, data);
         response.setHeader("Access-Control-Allow-Origin", "*");
         return ResponseEntity.ok("Team is updated!");
@@ -42,7 +42,7 @@ public class TeamController {
     @DeleteMapping("/{id}")
     @ApiOperation("Delete team by id")
     @ResponseBody
-    public ResponseEntity delete(@PathVariable final Integer id, @RequestHeader(value = "Access-Control-Allow-Origin", required = false) String header, HttpServletResponse response) {
+    public ResponseEntity delete(@PathVariable final Integer id, HttpServletResponse response) {
         teamService.delete(id);
         response.setHeader("Access-Control-Allow-Origin", "*");
         return ResponseEntity.ok("Team is deleted!");
@@ -51,7 +51,7 @@ public class TeamController {
     @GetMapping("/{id}")
     @ApiOperation("Load team by id")
     @ResponseBody
-    public Team load(@PathVariable final Integer id, @RequestHeader(value = "Access-Control-Allow-Origin", required = false) String header, HttpServletResponse response) {
+    public Team load(@PathVariable final Integer id, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         return teamService.get(id);
     }
@@ -60,7 +60,7 @@ public class TeamController {
     @ApiOperation("Load all teams")
     @ResponseBody
     @ResponseHeader(name = "Access-Control-Allow-Origin", description = "*")
-    public Collection<Team> get(@RequestHeader(value = "Access-Control-Allow-Origin", required = false) String header, HttpServletResponse response) {
+    public Collection<Team> get(HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         return teamService.get();
     }

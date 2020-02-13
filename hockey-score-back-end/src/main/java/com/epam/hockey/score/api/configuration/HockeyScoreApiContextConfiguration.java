@@ -2,12 +2,14 @@ package com.epam.hockey.score.api.configuration;
 
 import com.epam.hockey.score.api.repository.PlayerRepository;
 import com.epam.hockey.score.api.repository.TeamRepository;
+import com.epam.hockey.score.api.repository.UserRepository;
 import com.epam.hockey.score.api.repository.impl.PlayerRepositoryImpl;
 import com.epam.hockey.score.api.repository.impl.TeamRepositoryImpl;
-import com.epam.hockey.score.api.service.PlayerService;
-import com.epam.hockey.score.api.service.TeamService;
+import com.epam.hockey.score.api.repository.impl.UserRepositoryImpl;
+import com.epam.hockey.score.api.service.*;
 import com.epam.hockey.score.api.service.impl.PlayerServiceImpl;
 import com.epam.hockey.score.api.service.impl.TeamServiceImpl;
+import com.epam.hockey.score.api.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -51,5 +53,17 @@ public class HockeyScoreApiContextConfiguration {
     @Bean
     public PlayerService playerService(PlayerRepository playerRepository) {
         return new PlayerServiceImpl(playerRepository);
+    }
+    @Bean
+    public UserService userservice (UserRepository userRepository) {
+        return new UserServiceImpl(userRepository);
+    }
+    @Bean
+    public AuthService authService(UserService userservice) {
+        return new AuthServiceImpl(userservice);
+    }
+    @Bean
+    public UserRepository userRepository() {
+        return new UserRepositoryImpl();
     }
 }

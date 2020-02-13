@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Team } from '../shared/model/team/team';
 import { JsonPipe } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { OderByPipe } from '../shared/pipes/oder-by.pipe';
 
@@ -11,7 +11,7 @@ import { OderByPipe } from '../shared/pipes/oder-by.pipe';
 })
 export class TeamService {
 
-  private static readonly TEAMS_URL: string = 'http://localhost:8090/teams';
+  private static readonly TEAMS_URL: string = 'http://localhost:8090/api/teams';
 
   constructor(private readonly jsPipe: JsonPipe, private readonly http: HttpClient, private readonly orderPipe: OderByPipe) {
   }
@@ -27,22 +27,28 @@ export class TeamService {
   }
 
   createTeam(team: Team) {
-    this.http.post<Team>(TeamService.TEAMS_URL, team);
     console.log("from TeamService create team");
+    return this.http.post<Team>(TeamService.TEAMS_URL, team);
+
   }
 
   updateTeam(team: Team) {
     console.log(this.jsPipe.transform(team))
-    this.http.put<Team>(TeamService.TEAMS_URL + '/' + team.id, team);
     console.log("from TeamService update team by id " + team.id);
+    return this.http.put<Team>(TeamService.TEAMS_URL + '/' + team.id, team);
+
   }
 
-  deleteTeam(teamId: number) {
-    this.http.delete<Team>(TeamService.TEAMS_URL, {
-      params: {
-        id: 'teamId'
-      }
-    });
+  deleteTeam(id: number) {
     console.log("from TeamService delete team by id");
+    return this.http.delete<Team>(TeamService.TEAMS_URL, {
+      params: new HttpParams().set('id', id.toString())
+    }); 
   }
+
+
+ /*  deleteTeam(id: number) {
+    console.log("from TeamService delete team by id");
+    return this.http.delete<Team>(TeamService.TEAMS_URL + '/' + id);
+  } */
 }

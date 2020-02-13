@@ -54,7 +54,7 @@ public class TeamRepositoryImplTest {
         Collection<Team> teams = teamRepository.select();
         Integer lastId = teams.stream().max(Comparator.comparingInt(Team::getId)).get().getId();
         Assert.assertNotNull(teamId);
-        Assert.assertEquals(teamId, Integer.valueOf(lastId + 1));
+        Assert.assertEquals(teamId, Integer.valueOf(lastId));
     }
 
     @Test(dependsOnMethods = "testInsert")
