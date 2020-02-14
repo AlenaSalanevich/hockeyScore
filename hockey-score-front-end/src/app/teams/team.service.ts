@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Team } from '../shared/model/team/team';
 import { JsonPipe } from '@angular/common';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { OderByPipe } from '../shared/pipes/oder-by.pipe';
 
@@ -38,14 +38,6 @@ export class TeamService {
     return this.http.put<Team>(TeamService.TEAMS_URL + '/' + team.id, team);
 
   }
-
-  /* deleteTeam(id: number) {
-    console.log("from TeamService delete team by id");
-    return this.http.delete<Team>(TeamService.TEAMS_URL, {
-      params: new HttpParams().set('id', id.toString())
-    }); 
-  } */
-
 
   deleteTeam(id: number) {
     console.log("from TeamService delete team by id");

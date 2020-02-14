@@ -11,4 +11,8 @@ export class User extends BaseEntity implements Iuser, Ilogin {
     name: string;
     email: string;
     isAuth: boolean;
+    token: {
+        token: string;
+        expirationDate: Date;
+    }
 }

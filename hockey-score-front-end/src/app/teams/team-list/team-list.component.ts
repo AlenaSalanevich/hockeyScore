@@ -4,6 +4,7 @@ import { TeamService } from '../team.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { HttpErrorResponse } from '@angular/common/http';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-team-list',
@@ -17,7 +18,9 @@ export class TeamListComponent implements OnInit, OnDestroy {
   public isLoginSubscription: Subscription;
   private teamSubscription: Subscription;
 
-  constructor(readonly teamService: TeamService, private readonly authService: AuthService) {
+  constructor(readonly teamService: TeamService,
+    private readonly authService: AuthService,
+    private readonly jsonPipe: JsonPipe) {
   }
 
   ngOnInit() {
@@ -60,5 +63,15 @@ export class TeamListComponent implements OnInit, OnDestroy {
   }
   isTeamsEmpty(): boolean {
     return this.teams.length === 0;
+  }
+  onSearchClicked(likeChars: string) {
+    this.teamService.getTeams().subscribe((res: Team[]) => {
+      const filteredTeams: Team[] = [...res.filter(t => t.name.toLowerCase().includes(likeChars.toLowerCase()))];
+      console.log("filteredTeams: " + " " + this.jsonPipe.transform(filteredTeams));
+      this.teams = filteredTeams;
+    }, (error: HttpErrorResponse) => {
+      this.init();
+      console.log(console.error())
+    });
   }
 }
