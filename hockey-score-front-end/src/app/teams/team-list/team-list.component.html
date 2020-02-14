@@ -15,10 +15,4 @@
     <mat-paginator [length]="getLenght(pageEvent.pageSize)" [pageSize]="pageEvent.pageSize"
         [pageSizeOptions]="getPageSizeOption()" (page)="pageEvent = $event" showFirstLastButtons>
     </mat-paginator>
-    <div *ngIf="pageEvent">
-        <h5>Page Change Event</h5>
-        <div>List length: {{pageEvent.length}}</div>
-        <div>Page size: {{pageEvent.pageSize}}</div>
-        <div>Page index: {{pageEvent.pageIndex}}</div>
-    </div>
 </div>

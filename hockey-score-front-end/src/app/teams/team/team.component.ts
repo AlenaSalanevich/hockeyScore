@@ -1,7 +1,9 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, Output, OnInit, OnDestroy } from '@angular/core';
 import { Team } from 'src/app/shared/model/team/team';
 import { EventEmitter } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-team',
@@ -9,22 +11,31 @@ import { ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./team.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TeamComponent {
+export class TeamComponent implements OnInit, OnDestroy {
 
   @Input() public team: Team;
-  @Input() public isLogged: boolean;
+  public isAuth: Boolean;
+  private isAuthSubscription: Subscription;
   public static minRateLevel: number = 10;
 
   @Output() public onDelete = new EventEmitter<Team>();
   @Output() public onEdit = new EventEmitter<Team>();
 
+  ngOnDestroy(): void {
+    this.isAuthSubscription.unsubscribe();
+  }
+  ngOnInit(): void {
+    this.isAuthSubscription = this.authService.isLogin.subscribe(res => this.isAuth = res);
+  }
+
+
   public deleteSelectedTeam: Team;
 
   public editSelectedTeam: Team;
 
-  constructor() { }
+  constructor(private readonly authService: AuthService) { }
   columnsToDisplay = ['number', 'name', 'position', 'country', 'age', 'shoots', 'height', 'weight'];
- 
+
   onEditSelect(team) {
     this.onEdit.emit(team);
     console.log('edit ' + team.name);

@@ -29,7 +29,6 @@ export class TeamListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.init();
     this.isLoginSubscription = this.authService.isLogin.subscribe(result => this.isLogin = result);
-
     this.pageEvent = this.getInitialPageEvent();
   }
 

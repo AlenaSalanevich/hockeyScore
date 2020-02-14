@@ -25,12 +25,12 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-icon-button class="mat-icon-button-card-actions" (click)="onDeleteClick(team); editSelectedTeam =null"
-      *ngIf="isLogged">
+      *ngIf="isAuth">
       <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">delete</i>
       </mat-icon>
     </button>
     <button mat-icon-button class="mat-icon-button-card-actions" (click)="onEditClick(team); deleteSelectedTeam=null"
-      *ngIf="isLogged">
+      *ngIf="isAuth">
       <mat-icon><i class="material-icons md-24 blue" aria-hidden="false">mode_edit</i>
       </mat-icon>
     </button>
