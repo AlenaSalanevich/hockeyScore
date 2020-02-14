@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamComponent } from './team/team.component';
 import { SharedModule } from '../shared/shared.module';
-import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatExpansionModule, MatFormFieldModule, MatTableModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatExpansionModule, MatFormFieldModule, MatTableModule, MatInputModule, MatPaginatorModule } from '@angular/material';
 import { PlayersModule } from '../players/players.module';
 import { AddTeamComponent } from './add-team/add-team.component';
 import { RouterModule } from '@angular/router';
@@ -28,7 +28,8 @@ import { OderByPipe } from '../shared/pipes/oder-by.pipe';
     MatTableModule,
     MatInputModule,
     RouterModule,
-    FormsModule
+    FormsModule, 
+    MatPaginatorModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [OderByPipe]

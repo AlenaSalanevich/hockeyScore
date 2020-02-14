@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { HttpErrorResponse } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-team-list',
@@ -17,6 +18,8 @@ export class TeamListComponent implements OnInit, OnDestroy {
   private isLogin: Boolean;
   public isLoginSubscription: Subscription;
   private teamSubscription: Subscription;
+  public pageSize: number = 5;
+  public pageEvent: PageEvent;
 
   constructor(readonly teamService: TeamService,
     private readonly authService: AuthService,
@@ -26,6 +29,8 @@ export class TeamListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.init();
     this.isLoginSubscription = this.authService.isLogin.subscribe(result => this.isLogin = result);
+
+    this.pageEvent = this.getInitialPageEvent();
   }
 
   private init() {
@@ -73,5 +78,21 @@ export class TeamListComponent implements OnInit, OnDestroy {
       this.init();
       console.log(console.error())
     });
+  }
+
+  getLenght(pageSize: number): number {
+    return Math.round(this.teams.length / pageSize) === 0 ? Math.round(this.teams.length / pageSize) + 1 : Math.round(this.teams.length / pageSize);
+  }
+
+  getPageSizeOption(): number[] {
+    return [this.pageSize, this.pageSize * 2, this.pageSize * 10]
+  }
+
+  getInitialPageEvent(): PageEvent {
+    let initialPageEvent = new PageEvent();
+    initialPageEvent.pageIndex = 1;
+    initialPageEvent.pageSize = this.pageSize;
+    initialPageEvent.length = this.getLenght(initialPageEvent.pageSize);
+    return initialPageEvent;
   }
 }

@@ -1,5 +1,9 @@
 .team-card {
     max-width: 400px;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 20px;
+    margin-bottom: 30px;
   }
   
   .team-header-image {

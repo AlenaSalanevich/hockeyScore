@@ -31,6 +31,7 @@ import { DateBorderDirective } from './directive/date-border.directive';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DurationPipe } from './pipes/duration.pipe';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [HeaderComponent,
@@ -44,7 +45,8 @@ import { DurationPipe } from './pipes/duration.pipe';
     DateBorderDirective,
     BreadcrumbComponent,
     NotfoundComponent,
-    DurationPipe],
+    DurationPipe,
+    PaginationComponent],
   exports: [HeaderComponent,
     FooterComponent,
     HomeComponent,

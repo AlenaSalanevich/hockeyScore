@@ -1,16 +1,24 @@
-<div class="team-list">
-    <div class="search-panel">
-        <app-search (onSearch)="onSearchClicked($event)"></app-search>
-        <button mat-raised-button color="primary" *ngIf="isLogged()" [routerLink]="['add']"> Add team
-        </button>
-    </div>
+<div class="teams-content">
+    <app-search (onSearch)="onSearchClicked($event)"></app-search>
+    <button mat-raised-button color="primary" *ngIf="isLogged()" [routerLink]="['add']"> Add team
+    </button>
     <mat-divider></mat-divider>
-    <div>
-        <p *ngIf="!isTeamsEmpty() && isLogged()">No teams, feel free to add new one!</p>
+    <div class="team-list">
+        <p *ngIf="isTeamsEmpty() && isLogged()">No teams, feel free to add new one!</p>
         <div class="team-list">
             <app-team *ngFor="let team of teams |  oderBy: teamScore" [team]="team" (onDelete)="onDeleteClicked($event)"
                 (onEdit)="onEditClicked($event)" [isLogged]="isLogged">
             </app-team>
         </div>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-paginator [length]="getLenght(pageEvent.pageSize)" [pageSize]="pageEvent.pageSize"
+        [pageSizeOptions]="getPageSizeOption()" (page)="pageEvent = $event" showFirstLastButtons>
+    </mat-paginator>
+    <div *ngIf="pageEvent">
+        <h5>Page Change Event</h5>
+        <div>List length: {{pageEvent.length}}</div>
+        <div>Page size: {{pageEvent.pageSize}}</div>
+        <div>Page index: {{pageEvent.pageIndex}}</div>
     </div>
 </div>

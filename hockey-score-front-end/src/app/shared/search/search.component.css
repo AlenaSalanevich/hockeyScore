@@ -1,8 +1,16 @@
 .search-button-row button,
 .search-button-row a {
-  margin-right: 8px;
+  margin-left: auto;
 }
 
 .search-button-row{
-  display: flex;
+  margin: left;
+}
+.search-form{
+  width: 100%;
+  margin-left:auto
+}
+.search-form-field{
+  width: 50%;
+  margin-left:auto
 }

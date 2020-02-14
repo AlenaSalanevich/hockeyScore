@@ -1,3 +1,6 @@
+.teams-content{
+    display: block;
+}
 .team-list{
     display: flex;
 }
