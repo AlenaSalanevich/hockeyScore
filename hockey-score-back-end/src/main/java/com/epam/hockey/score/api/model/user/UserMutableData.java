@@ -5,7 +5,7 @@ import java.util.Collection;
 public class UserMutableData {
     private String name;
     private String login;
-    private String secret;
+    private String password;
     private Collection<UserRole> roles;
 
     public String getName() {
@@ -24,12 +24,12 @@ public class UserMutableData {
         this.login = login;
     }
 
-    public String getSecret() {
-        return secret;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSecret(String secret) {
-        this.secret = secret;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Collection<UserRole> getRoles() {

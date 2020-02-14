@@ -3,7 +3,7 @@ package com.epam.hockey.score.api.model.user;
 public class UserCredentials {
 
     private String login;
-    private String secret;
+    private String password;
 
     public String getLogin() {
         return login;
@@ -13,11 +13,11 @@ public class UserCredentials {
         this.login = login;
     }
 
-    public String getSecret() {
-        return secret;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSecret(String secret) {
-        this.secret = secret;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

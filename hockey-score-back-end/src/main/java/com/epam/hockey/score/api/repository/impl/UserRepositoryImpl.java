@@ -41,7 +41,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Collection<User> selectByFilter(UserFilter filter) {
         return stubUser.getLogin().equalsIgnoreCase(filter.getLogin())
-                && stubUser.getSecret().equalsIgnoreCase(filter.getSecret()) ? singletonList(stubUser) : EMPTY_LIST;
+                && stubUser.getPassword().equalsIgnoreCase(filter.getPassword()) ? singletonList(stubUser) : EMPTY_LIST;
     }
 
     public User createStubUser() {
@@ -49,7 +49,7 @@ public class UserRepositoryImpl implements UserRepository {
         stubUser.setId(1);
         stubUser.setLogin("Alena");
         stubUser.setName("Alenka Salanevich");
-        stubUser.setSecret("111");
+        stubUser.setPassword("111");
         stubUser.setRoles(singletonList(UserRole.admin));
         return stubUser;
     }

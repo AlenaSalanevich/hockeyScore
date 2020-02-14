@@ -14,12 +14,12 @@ public class AuthServiceImpl implements AuthService {
     public AuthServiceImpl(UserService service) {
         this.service = service;
     }
-    
+
     @Override
     public User authenticate(UserCredentials creds) {
         UserFilter filter = new UserFilter();
         filter.setLogin(creds.getLogin());
-        filter.setSecret(creds.getSecret());
+        filter.setPassword(creds.getPassword());
         return service.get(filter).stream().findFirst().orElseThrow(() -> new RuntimeException("Invalid credentials"));
     }
 }
