@@ -1,14 +1,15 @@
-<mat-card class="team-card" *ngIf="currentUser">
+<mat-card class="setting-card" *ngIf="currentUser">
     <mat-card-header>
         <div mat-card-avatar class="team-header-image"></div>
         <mat-card-title>Setting Info</mat-card-title>
         <mat-card-subtitle>Current user</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p>{{currentUser.login}}</p>
-        <p>{{currentUser.email}}</p>
-        <p>{{currentUser.name}}</p>
-        <p>{{currentUser.password}}</p>
+        <h2>Login: {{currentUser.login}}</h2>
+        <h2>Email: {{currentUser.email}}</h2>
+        <h2>Name: {{currentUser.name}}</h2>
+        <h2>Password: {{currentUser.password}}</h2>
+        <h2 *ngIf="currentUser.token">Token: {{currentUser.token.token}}</h2>
     </mat-card-content>
     <mat-card-actions>
         <button class="add-team-button" type="submit" mat-raised-button color="primary" (click)="redirectToHome()">

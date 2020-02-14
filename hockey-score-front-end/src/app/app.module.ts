@@ -13,7 +13,8 @@ import { PlayersModule } from './players/players.module';
 import { GamesModule } from './games/games.module';
 import { DatePipe, JsonPipe } from '@angular/common';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     GamesModule
   ],
-  providers: [DatePipe, JsonPipe, AuthGuard],
+  providers: [DatePipe, JsonPipe, AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
