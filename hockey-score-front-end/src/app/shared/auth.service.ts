@@ -16,7 +16,7 @@ export class AuthService {
   public isLogin: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   login(userCredentials: Login) {
-    this.httpClient.post<User>('http://localhost:8090/api/auth', userCredentials).subscribe((result: User) => {
+    this.httpClient.post<User>('http://localhost:8090/api/login', userCredentials).subscribe((result: User) => {
       this.currentUser.next(result);
       this.isLogin.next(result.isAuth);
     }, (error: HttpErrorResponse) => {
@@ -27,7 +27,13 @@ export class AuthService {
   }
 
   logout() {
-    this.isLogin.next(false);
-    this.currentUser.next(null)
+    this.httpClient.get('http://localhost:8090/api/logout').subscribe(() => {
+      this.isLogin.next(false);
+      this.currentUser.next(null)
+    }, (error: HttpErrorResponse) => {
+      console.error();
+    });
+
+
   }
 }

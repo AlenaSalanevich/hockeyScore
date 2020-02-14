@@ -10,4 +10,8 @@ public interface AuthService {
 
     User authenticate(UserCredentials creds);
 
+    void logout();
+
+    String getCurrentUserToken();
+
 }

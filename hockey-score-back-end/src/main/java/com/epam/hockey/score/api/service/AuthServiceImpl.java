@@ -11,6 +11,8 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserService service;
 
+    private String currentToken;
+
     public AuthServiceImpl(UserService service) {
         this.service = service;
     }
@@ -20,6 +22,19 @@ public class AuthServiceImpl implements AuthService {
         UserFilter filter = new UserFilter();
         filter.setLogin(creds.getLogin());
         filter.setPassword(creds.getPassword());
-        return service.get(filter).stream().findFirst().orElseThrow(() -> new RuntimeException("Invalid credentials"));
+        User user = service.get(filter).stream().findFirst().orElseThrow(() -> new RuntimeException("Invalid credentials"));
+        currentToken = (String) user.getToken().get("token");
+        return user;
     }
+
+    @Override
+    public void logout() {
+        currentToken = "";
+    }
+
+    @Override
+    public String getCurrentUserToken() {
+        return currentToken;
+    }
+
 }

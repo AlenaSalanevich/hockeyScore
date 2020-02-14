@@ -2,6 +2,7 @@ package com.epam.hockey.score.api.rest.controller;
 
 import com.epam.hockey.score.api.model.team.Team;
 import com.epam.hockey.score.api.model.team.TeamMutableData;
+import com.epam.hockey.score.api.rest.Validator;
 import com.epam.hockey.score.api.service.TeamService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,24 +17,27 @@ import java.util.Collection;
 
 @Api(tags = "Team controller")
 @Controller
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600, methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
 @RequestMapping(path = "api/teams")
 public class TeamController {
 
     @Autowired
-    TeamService teamService;
+    private TeamService teamService;
+    @Autowired
+    private Validator validator;
 
     @PostMapping()
     @ApiOperation("Create new team")
     @ResponseBody
-    public Integer create(@RequestBody TeamMutableData data, HttpServletResponse response) {
+    public Integer create(@RequestBody TeamMutableData data, @RequestHeader(value = "Authorization") String token) {
+        validator.validate(token);
         return teamService.create(data);
     }
 
     @PutMapping(value = "/{id}")
     @ApiOperation("Update team by id")
     @ResponseBody
-    public ResponseEntity update(@PathVariable final Integer id, @RequestBody TeamMutableData data, HttpServletResponse response) {
+    public ResponseEntity update(@PathVariable final Integer id, @RequestBody TeamMutableData data) {
         teamService.update(id, data);
         return ResponseEntity.ok("Team is updated!");
     }
@@ -41,19 +45,15 @@ public class TeamController {
     @DeleteMapping("/{id}")
     @ApiOperation("Delete team by id")
     @ResponseBody
-    public ResponseEntity delete(@PathVariable final Integer id, HttpServletResponse response) {
+    public ResponseEntity delete(@PathVariable final Integer id) {
         teamService.delete(id);
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
-        response.setHeader("Access-Control-Allow-Origin", "*");
         return ResponseEntity.ok("Team is deleted!");
     }
 
     @GetMapping("/{id}")
     @ApiOperation("Load team by id")
     @ResponseBody
-    public Team load(@PathVariable final Integer id, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
-        response.setHeader("Access-Control-Allow-Origin", "*");
+    public Team load(@PathVariable final Integer id) {
         return teamService.get(id);
     }
 
@@ -62,8 +62,8 @@ public class TeamController {
     @ResponseBody
     @ResponseHeader(name = "Access-Control-Allow-Origin", description = "*")
     public Collection<Team> get(HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
-        response.setHeader("Access-Control-Allow-Origin", "*");
         return teamService.get();
     }
+
+
 }

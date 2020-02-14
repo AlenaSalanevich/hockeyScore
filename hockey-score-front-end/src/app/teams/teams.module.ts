@@ -7,7 +7,7 @@ import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatExpans
 import { PlayersModule } from '../players/players.module';
 import { AddTeamComponent } from './add-team/add-team.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OderByPipe } from '../shared/pipes/oder-by.pipe';
 
 
@@ -29,7 +29,8 @@ import { OderByPipe } from '../shared/pipes/oder-by.pipe';
     MatInputModule,
     RouterModule,
     FormsModule, 
-    MatPaginatorModule
+    MatPaginatorModule,
+    ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [OderByPipe]
