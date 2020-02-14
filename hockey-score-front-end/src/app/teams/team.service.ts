@@ -39,16 +39,16 @@ export class TeamService {
 
   }
 
-  deleteTeam(id: number) {
+  /* deleteTeam(id: number) {
     console.log("from TeamService delete team by id");
     return this.http.delete<Team>(TeamService.TEAMS_URL, {
       params: new HttpParams().set('id', id.toString())
     }); 
-  }
+  } */
 
 
- /*  deleteTeam(id: number) {
+  deleteTeam(id: number) {
     console.log("from TeamService delete team by id");
     return this.http.delete<Team>(TeamService.TEAMS_URL + '/' + id);
-  } */
+  }
 }

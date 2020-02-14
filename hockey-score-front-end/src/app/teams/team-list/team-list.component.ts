@@ -3,9 +3,7 @@ import { Team } from 'src/app/shared/model/team/team';
 import { TeamService } from '../team.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Observable } from 'rxjs';
-import { timingSafeEqual } from 'crypto';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-team-list',
@@ -14,37 +12,46 @@ import { timingSafeEqual } from 'crypto';
 })
 export class TeamListComponent implements OnInit, OnDestroy {
 
-  public teams$: Observable<Team[]>;
-  public team: Team[] = [];
-  public isLogin$: BehaviorSubject<boolean>;
-  private isLogin: boolean;
-  public authSubscription: Subscription = new Subscription();
+  public teams: Team[] = [];
+  private isLogin: Boolean;
+  public isLoginSubscription: Subscription;
+  private teamSubscription: Subscription;
 
   constructor(readonly teamService: TeamService, private readonly authService: AuthService) {
   }
 
   ngOnInit() {
-    this.teams$ = this.teamService.getTeams();
-    this.isLogin$ = this.authService.isLogin;
-    this.authSubscription = this.isLogin$.subscribe(result => this.isLogin = result);
+    this.init();
+    this.isLoginSubscription = this.authService.isLogin.subscribe(result => this.isLogin = result);
+  }
+
+  private init() {
+    this.teamSubscription = this.teamService.getTeams().subscribe((result: Team[]) => {
+      this.teams = result;
+    }, (error: HttpErrorResponse) => console.log(error));
   }
 
   ngOnDestroy(): void {
-    this.authSubscription.unsubscribe();
+    this.isLoginSubscription.unsubscribe();
+    this.teamSubscription.unsubscribe();
   }
 
   onDeleteClicked(team) {
     console.log("delete: " + team.id);
-    this.teamService.deleteTeam(team.id);
+    this.teamService.deleteTeam(team.id).subscribe(() => {
+      this.init();
+    }, (error: HttpErrorResponse) => console.log(console.error()));
   }
 
 
   onEditClicked(team) {
     console.log("edit " + team);
-    this.teamService.updateTeam(team);
+    this.teamService.updateTeam(team).subscribe(() => {
+      this.init();
+    }, (error: HttpErrorResponse) => console.log(console.error()));;
   }
 
-  public isLogged(): boolean {
+  public isLogged(): Boolean {
     return this.isLogin;
   }
 
@@ -52,8 +59,6 @@ export class TeamListComponent implements OnInit, OnDestroy {
     return team.score;
   }
   isTeamsEmpty(): boolean {
-    return true;
-
+    return this.teams.length === 0;
   }
-
 }

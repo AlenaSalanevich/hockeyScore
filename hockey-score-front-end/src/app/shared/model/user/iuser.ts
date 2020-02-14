@@ -2,7 +2,7 @@
  * User entity interface.
  */
 export interface Iuser {
-    last_name: string;
-    first_name: string;
+    name: string;
     email: string;
+    isAuth: boolean;
 }

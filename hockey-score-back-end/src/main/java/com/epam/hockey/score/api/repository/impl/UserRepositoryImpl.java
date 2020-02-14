@@ -5,8 +5,14 @@ import com.epam.hockey.score.api.model.user.UserFilter;
 import com.epam.hockey.score.api.model.user.UserMutableData;
 import com.epam.hockey.score.api.model.user.UserRole;
 import com.epam.hockey.score.api.repository.UserRepository;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.util.Collections.EMPTY_LIST;
 import static java.util.Collections.singletonList;
@@ -48,10 +54,27 @@ public class UserRepositoryImpl implements UserRepository {
         User stubUser = new User();
         stubUser.setId(1);
         stubUser.setLogin("Alena");
-        stubUser.setName("Alenka Salanevich");
+        stubUser.setName("Alena Salanevich");
         stubUser.setPassword("111");
         stubUser.setRoles(singletonList(UserRole.admin));
+        stubUser.setEmail("alena.salanevich@epam.com");
+        stubUser.setAuth(true);
+        stubUser.setToken(generateStubToken(stubUser));
         return stubUser;
+    }
+
+    public Map<String, Object> generateStubToken(User stubUser) {
+        HashMap<String, Object> stubToken = new HashMap<>();
+        stubToken.put("login", stubUser.getLogin());
+        stubToken.put("createDate", new Date());
+        stubToken.put("expirationDate", Date.from(((Date) stubToken.get("createDate")).toInstant().plusSeconds(600)));
+        JwtBuilder jwtBuilder = Jwts.builder();
+        jwtBuilder.setExpiration(((Date) stubToken.get("expirationDate")));
+        jwtBuilder.setClaims(stubToken);
+        String key = "stub";
+        String token = jwtBuilder.signWith(SignatureAlgorithm.HS512, key).compact();
+        stubToken.put("token", token);
+        return stubToken;
     }
 
     public User getStubUser() {

@@ -8,7 +8,7 @@ import { BaseEntity } from '../base-entity';
 export class User extends BaseEntity implements Iuser, Ilogin {
     password: string;
     login: string;
-    last_name: string;
-    first_name: string;
+    name: string;
     email: string;
+    isAuth: boolean;
 }

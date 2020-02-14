@@ -1,54 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Login } from './model/user/login';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { User } from './model/user/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly _isLogin: BehaviorSubject<boolean>;
-  private readonly _currentUser: BehaviorSubject<Login>;
-
-  private admin: Login = new Login("Alena", "111");
-
-  private currentUser: Login;
-
-  constructor() {
-    this._isLogin = new BehaviorSubject(false);
-    this._currentUser = new BehaviorSubject(new Login('', ''))
+  constructor(private readonly httpClient: HttpClient) {
   }
 
+  public currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  public isLogin: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
+
   login(userCredentials: Login) {
-    if (userCredentials.login === this.admin.login && userCredentials.password === this.admin.password) {
-      this._isLogin.next(true);
-      this._currentUser.next(userCredentials)
-      this.currentUser = userCredentials;
-    }
-    else {
-      this._isLogin.next(false);
-      this._currentUser.next(new Login("", ""))
-    }
+    this.httpClient.post<User>('http://localhost:8090/api/auth', userCredentials).subscribe((result: User) => {
+      this.currentUser.next(result);
+      this.isLogin.next(result.isAuth);
+    }, (error: HttpErrorResponse) => {
+      console.error();
+      this.isLogin.next(false);
+      this.currentUser.next(null)
+    });
   }
 
   logout() {
-    this._isLogin.next(false);
-    this._currentUser.next(new Login("", ""))
-  }
-
-  /**
-   * Get the auth property.
-   *
-   * @returns {Observable<boolean>} the auth property.
-   */
-  get isLogin(): BehaviorSubject<boolean> {
-    return this._isLogin;
-  }
-
-  getUserInfo(): Login {
-    return this.currentUser;
-  }
-  getCurrentUser(): BehaviorSubject<Login> {
-    return this._currentUser;
+    this.isLogin.next(false);
+    this.currentUser.next(null)
   }
 }

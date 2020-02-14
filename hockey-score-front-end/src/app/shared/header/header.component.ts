@@ -1,6 +1,8 @@
-import { Component, OnInit,  OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Login } from '../model/user/login';
+import { Subscription } from 'rxjs';
+import { User } from '../model/user/user';
+
 
 @Component({
   selector: 'app-header',
@@ -10,26 +12,27 @@ import { Login } from '../model/user/login';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  public isLogin: boolean;
-  public currentUser: Login;
+  public isLogin: Boolean;
+  public currentUser: User;
+  public isLoginSubscription: Subscription;
+  private currentUserSubscription: Subscription;
 
   constructor(private readonly authService: AuthService) {
-    this.authService.isLogin.subscribe(result => this.isLogin = result);
-    this.authService.getCurrentUser().subscribe(result => this.currentUser = result);
   }
 
   ngOnInit() {
-    this.isLogin = false;
-    this.authService.isLogin.subscribe(result => this.isLogin = result);
+    this.currentUserSubscription = this.authService.currentUser.subscribe(res => this.currentUser = res);
+    this.isLoginSubscription = this.authService.isLogin.subscribe(res => this.isLogin = res)
   }
 
   ngOnDestroy(): void {
-    this.authService.isLogin.unsubscribe();
-    this.authService.getCurrentUser().unsubscribe();
+    this.currentUserSubscription.unsubscribe();
+    this.isLoginSubscription.unsubscribe();
   }
 
   logout() {
     console.log('log out!');
+    this.isLogin = false;
     this.authService.logout();
   }
 }

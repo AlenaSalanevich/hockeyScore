@@ -5,6 +5,7 @@ import { Team } from 'src/app/shared/model/team/team';
 import { PlayerService } from 'src/app/players/player.service';
 import { Player } from 'src/app/shared/model/player/player';
 import { JsonPipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-team',
@@ -40,8 +41,11 @@ export class AddTeamComponent implements OnInit {
     console.log("From tryCreatTeam method: " + this.jsPipe.transform(this.selectedPlayerNames));
     console.log('try to create team ' + this.team.name);
     this.team.players = this.resolveSelectedPlayers()
-    this.teamService.createTeam(this.team);
-    this.router.navigateByUrl("/teams");
+    this.teamService.createTeam(this.team).subscribe((res: Team) => {
+      this.redirectToTeams();
+    }, (error: HttpErrorResponse) => {
+      console.log(console.log(error))
+    });
   }
 
   resolveSelectedPlayers(): Player[] {

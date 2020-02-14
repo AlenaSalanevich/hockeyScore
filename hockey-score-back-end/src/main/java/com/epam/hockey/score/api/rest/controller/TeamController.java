@@ -16,6 +16,7 @@ import java.util.Collection;
 
 @Api(tags = "Team controller")
 @Controller
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping(path = "api/teams")
 public class TeamController {
 
@@ -26,7 +27,6 @@ public class TeamController {
     @ApiOperation("Create new team")
     @ResponseBody
     public Integer create(@RequestBody TeamMutableData data, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
         return teamService.create(data);
     }
 
@@ -35,7 +35,6 @@ public class TeamController {
     @ResponseBody
     public ResponseEntity update(@PathVariable final Integer id, @RequestBody TeamMutableData data, HttpServletResponse response) {
         teamService.update(id, data);
-        response.setHeader("Access-Control-Allow-Origin", "*");
         return ResponseEntity.ok("Team is updated!");
     }
 
@@ -44,6 +43,7 @@ public class TeamController {
     @ResponseBody
     public ResponseEntity delete(@PathVariable final Integer id, HttpServletResponse response) {
         teamService.delete(id);
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
         response.setHeader("Access-Control-Allow-Origin", "*");
         return ResponseEntity.ok("Team is deleted!");
     }
@@ -52,6 +52,7 @@ public class TeamController {
     @ApiOperation("Load team by id")
     @ResponseBody
     public Team load(@PathVariable final Integer id, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
         response.setHeader("Access-Control-Allow-Origin", "*");
         return teamService.get(id);
     }
@@ -61,6 +62,7 @@ public class TeamController {
     @ResponseBody
     @ResponseHeader(name = "Access-Control-Allow-Origin", description = "*")
     public Collection<Team> get(HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT");
         response.setHeader("Access-Control-Allow-Origin", "*");
         return teamService.get();
     }

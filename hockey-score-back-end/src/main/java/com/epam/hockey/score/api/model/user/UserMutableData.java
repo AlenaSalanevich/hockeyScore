@@ -7,6 +7,24 @@ public class UserMutableData {
     private String login;
     private String password;
     private Collection<UserRole> roles;
+    private String email;
+    private Boolean isAuth;
+
+    public Boolean getAuth() {
+        return isAuth;
+    }
+
+    public void setAuth(Boolean auth) {
+        isAuth = auth;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getName() {
         return name;
