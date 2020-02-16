@@ -32,6 +32,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DurationPipe } from './pipes/duration.pipe';
 import { PaginationComponent } from './pagination/pagination.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [HeaderComponent,
@@ -46,7 +47,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     BreadcrumbComponent,
     NotfoundComponent,
     DurationPipe,
-    PaginationComponent],
+    PaginationComponent,
+    ErrorComponent],
   exports: [HeaderComponent,
     FooterComponent,
     HomeComponent,
@@ -54,7 +56,11 @@ import { PaginationComponent } from './pagination/pagination.component';
     SearchComponent,
     OderByPipe,
     SettingsComponent,
-    DateBorderDirective, BreadcrumbComponent, NotfoundComponent, DurationPipe],
+    DateBorderDirective,
+    BreadcrumbComponent,
+    NotfoundComponent,
+    ErrorComponent,
+    DurationPipe],
   imports: [
     CommonModule,
     MatButtonModule,

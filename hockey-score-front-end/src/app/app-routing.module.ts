@@ -9,6 +9,8 @@ import { SettingsComponent } from './shared/settings/settings.component';
 import { GameListComponent } from './games/game-list/game-list.component';
 import { NotfoundComponent } from './shared/notfound/notfound.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { ErrorComponent } from './shared/error/error.component';
+import { AddPlayerComponent } from './players/add-player/add-player.component';
 
 export const routes: Routes = [
   {
@@ -25,13 +27,28 @@ export const routes: Routes = [
     ]
   },
   { path: 'games', component: GameListComponent },
-  { path: 'players', component: PlayerListComponent },
+
+  {
+    path: 'players',
+
+    children: [
+      {
+        path: '',
+        component: PlayerListComponent
+      },
+      {
+        path: 'add',
+        component: AddPlayerComponent
+      },
+    ]
+  },
   { path: 'settings', component: SettingsComponent },
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'logout', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', component: NotfoundComponent }
+  { path: '**', component: NotfoundComponent },
+  { path: 'error', component: ErrorComponent }
 ];
 
 

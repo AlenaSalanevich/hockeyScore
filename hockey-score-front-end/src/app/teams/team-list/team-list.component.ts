@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ErrorHandler } from '@angular/core';
 import { Team } from 'src/app/shared/model/team/team';
 import { TeamService } from '../team.service';
 import { AuthService } from 'src/app/shared/auth.service';
@@ -23,7 +23,7 @@ export class TeamListComponent implements OnInit, OnDestroy {
 
   constructor(readonly teamService: TeamService,
     private readonly authService: AuthService,
-    private readonly jsonPipe: JsonPipe) {
+    private readonly jsonPipe: JsonPipe, private errorHandler: ErrorHandler) {
   }
 
   ngOnInit() {
@@ -33,9 +33,12 @@ export class TeamListComponent implements OnInit, OnDestroy {
   }
 
   private init() {
-    this.teamSubscription = this.teamService.getTeams().subscribe((result: Team[]) => {
+    this.teamSubscription = this.teamService.getTeams().pipe().subscribe((result: Team[]) => {
       this.teams = result;
-    }, (error: HttpErrorResponse) => console.log(error));
+    }, (error: HttpErrorResponse | any) => {
+      this.errorHandler.handleError(error)
+      console.log(error)
+    });
   }
 
   ngOnDestroy(): void {

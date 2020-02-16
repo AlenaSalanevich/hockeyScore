@@ -3,13 +3,19 @@ import { Player } from '../shared/model/player/player';
 import { Shoots } from '../shared/model/shoots.enum';
 import { Country } from '../shared/model/country.enum';
 import { Position } from '../shared/model/position.enum';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerService {
 
-  constructor() { }
+  constructor(private readonly httpClient: HttpClient) { }
+
+
+  private static readonly PLAYERS_URL: string = 'http://localhost:8090/api/players';
+
 
   getPlayers(): Player[] {
 
@@ -67,5 +73,10 @@ export class PlayerService {
         stats: []
       }
     ]
+  }
+
+  create(player: Player): Observable<Player> {
+    console.log("from TeamService create team");
+    return this.httpClient.post<Player>(PlayerService.PLAYERS_URL, player);
   }
 }

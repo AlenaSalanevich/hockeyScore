@@ -15,15 +15,18 @@ export class AuthService {
   public currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   public isLogin: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
-  login(userCredentials: Login) {
+  login(userCredentials: Login): string {
+    let errorMessage: string = '';
     this.httpClient.post<User>('http://localhost:8090/api/login', userCredentials).subscribe((result: User) => {
       this.currentUser.next(result);
       this.isLogin.next(result.isAuth);
     }, (error: HttpErrorResponse) => {
-      console.error();
+      // console.error();
       this.isLogin.next(false);
       this.currentUser.next(null)
+      errorMessage = error.message;
     });
+    return errorMessage;
   }
 
   logout() {
@@ -33,7 +36,5 @@ export class AuthService {
     }, (error: HttpErrorResponse) => {
       console.error();
     });
-
-
   }
 }

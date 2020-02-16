@@ -1,0 +1,13 @@
+<h2 [ngStyle]="{'background-color':'white', 'color': 'red', 'font-size': '86px', 'text-align': 'center'}">SOME ERROR
+    OCCURS
+</h2>
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Click to get more details!
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    {{error}}
+</mat-expansion-panel>
