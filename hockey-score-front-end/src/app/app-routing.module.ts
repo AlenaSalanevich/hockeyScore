@@ -43,12 +43,13 @@ export const routes: Routes = [
     ]
   },
   { path: 'settings', component: SettingsComponent },
+  { path: 'error', component: ErrorComponent },
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'logout', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', component: NotfoundComponent },
-  { path: 'error', component: ErrorComponent }
+  { path: '**', component: NotfoundComponent }
+ 
 ];
 
 

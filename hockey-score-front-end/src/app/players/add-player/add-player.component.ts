@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PlayerService } from '../player.service';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ export class AddPlayerComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private readonly playerService: PlayerService, private readonly router: Router) { }
+  constructor(private formBuilder: FormBuilder, private readonly playerService: PlayerService, private readonly router: Router, private handler: ErrorHandler) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -40,8 +40,11 @@ export class AddPlayerComponent implements OnInit {
       return;
     }
     this.playerService.create(this.registerForm.value)
-      .pipe().subscribe(() => console.log(""));
-    this.router.navigateByUrl("palyers")
+      .subscribe(() => console.log(""),
+        (error) => {
+          this.handler.handleError(error);
+        });
+    this.router.navigateByUrl("players")
   }
 
   onReset() {

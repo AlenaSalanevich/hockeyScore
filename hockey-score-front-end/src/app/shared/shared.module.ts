@@ -16,7 +16,9 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatSelectModule,
-  MatTabsModule
+  MatTabsModule,
+  MatExpansionPanel,
+  MatExpansionModule
 } from "@angular/material";
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -79,7 +81,8 @@ import { ErrorComponent } from './error/error.component';
     MatSelectModule,
     RouterModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatExpansionModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
