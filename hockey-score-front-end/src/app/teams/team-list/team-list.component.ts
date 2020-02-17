@@ -80,6 +80,10 @@ export class TeamListComponent implements OnInit, OnDestroy {
     });
   }
 
+  onCancelSearchClicked(likeChars: string) {
+    this.onSearchClicked(likeChars);
+  }
+
   getLenght(): number {
     return this.totalCount;
   }

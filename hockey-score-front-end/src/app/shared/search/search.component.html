@@ -3,5 +3,5 @@
     <input  matInput type="text" [(ngModel)]="likeChars" name="value" #name="ngModel" />
   </mat-form-field>
   <button mat-raised-button (click)="tryToFind(likeChars)" color="primary">Search </button>
-  <button mat-raised-button *ngIf="likeChars" (click)="likeChars=''" color="primary"> Cancel</button>
+  <button mat-raised-button *ngIf="likeChars" (click)="cancelSearch()" color="primary"> Cancel</button>
 </form>

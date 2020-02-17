@@ -1,5 +1,5 @@
 <div class="teams-content">
-    <app-search *ngIf="getLenght()!=0" (onSearch)="onSearchClicked($event)"></app-search>
+    <app-search *ngIf="getLenght()!=0" (onSearch)="onSearchClicked($event)" (onCancelSearch)="onCancelSearchClicked($event)"></app-search>
     <button mat-raised-button color="primary" *ngIf="isLogged()" [routerLink]="['add']"> Add team
     </button>
     <mat-divider></mat-divider>
