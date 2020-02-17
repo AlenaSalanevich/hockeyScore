@@ -1,10 +1,10 @@
 <div class="teams-content">
-    <app-search (onSearch)="onSearchClicked($event)"></app-search>
+    <app-search *ngIf="getLenght()!=0" (onSearch)="onSearchClicked($event)"></app-search>
     <button mat-raised-button color="primary" *ngIf="isLogged()" [routerLink]="['add']"> Add team
     </button>
     <mat-divider></mat-divider>
     <div class="team-list">
-        <p *ngIf="isTeamsEmpty() && isLogged()">No teams, feel free to add new one!</p>
+        <p *ngIf="getLenght()===0 && isLogged()">No teams, feel free to add new one!</p>
         <div class="team-list">
             <app-team *ngFor="let team of teams |  oderBy: teamScore" [team]="team" (onDelete)="onDeleteClicked($event)"
                 (onEdit)="onEditClicked($event)" [isLogged]="isLogged">
@@ -12,7 +12,7 @@
         </div>
     </div>
     <mat-divider></mat-divider>
-    <mat-paginator [length]="getLenght(pageEvent.pageSize)" [pageSize]="pageEvent.pageSize"
-        [pageSizeOptions]="getPageSizeOption()" (page)="pageEvent = $event" showFirstLastButtons>
+    <mat-paginator *ngIf="getLenght()!=0" [length]="getLenght()" [pageSize]="pageEvent.pageSize"
+        [pageSizeOptions]="getPageSizeOption()" (page)="onPageEvent($event)" showFirstLastButtons>
     </mat-paginator>
 </div>

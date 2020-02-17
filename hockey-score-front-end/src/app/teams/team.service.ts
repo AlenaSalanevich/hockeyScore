@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ErrorHandler } from '@angular/core';
 import { Team } from '../shared/model/team/team';
 import { JsonPipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { OderByPipe } from '../shared/pipes/oder-by.pipe';
+
+import { map, catchError } from 'rxjs/operators';
+import { PageableTeam } from '../shared/model/team/pageable-team';
 
 
 @Injectable({
@@ -13,12 +16,12 @@ export class TeamService {
 
   private static readonly TEAMS_URL: string = 'http://localhost:8090/api/teams';
 
-  constructor(private readonly jsPipe: JsonPipe, private readonly http: HttpClient, private readonly orderPipe: OderByPipe) {
+  constructor(private readonly jsPipe: JsonPipe, private readonly http: HttpClient, private readonly orderPipe: OderByPipe, private readonly errorHandler: ErrorHandler) {
   }
 
-  getTeams(): Observable<Team[]> {
+  getTeams(limit: number, offset: number): Observable<PageableTeam> {
     console.log("from TeamService get teams");
-    return this.http.get<Team[]>(TeamService.TEAMS_URL);
+    return this.http.get<PageableTeam>(TeamService.TEAMS_URL, { params: new HttpParams().set('limit', limit.toString()).set('offset', offset.toString()) });
   }
 
   getTeam(id: number): Observable<Team> {

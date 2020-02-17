@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ErrorHandler } from '@angular/core';
+import { Component, OnInit, OnDestroy, ErrorHandler, Output, ChangeDetectorRef } from '@angular/core';
 import { Team } from 'src/app/shared/model/team/team';
 import { TeamService } from '../team.service';
 import { AuthService } from 'src/app/shared/auth.service';
@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 import { HttpErrorResponse } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
 import { PageEvent } from '@angular/material';
+import { PageableTeam } from 'src/app/shared/model/team/pageable-team';
 
 @Component({
   selector: 'app-team-list',
@@ -20,10 +21,11 @@ export class TeamListComponent implements OnInit, OnDestroy {
   private teamSubscription: Subscription;
   public pageSize: number = 5;
   public pageEvent: PageEvent;
+  private totalCount: number = 0;
 
   constructor(readonly teamService: TeamService,
     private readonly authService: AuthService,
-    private readonly jsonPipe: JsonPipe, private errorHandler: ErrorHandler) {
+    private readonly jsonPipe: JsonPipe, private readonly view: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -33,11 +35,9 @@ export class TeamListComponent implements OnInit, OnDestroy {
   }
 
   private init() {
-    this.teamSubscription = this.teamService.getTeams().pipe().subscribe((result: Team[]) => {
-      this.teams = result;
-    }, (error: HttpErrorResponse | any) => {
-      this.errorHandler.handleError(error)
-      console.log(error)
+    this.teamSubscription = this.teamService.getTeams(this.pageSize, 0).subscribe((result: PageableTeam) => {
+      this.teams = result.teams;
+      this.totalCount = result.totalCount;
     });
   }
 
@@ -50,7 +50,8 @@ export class TeamListComponent implements OnInit, OnDestroy {
     console.log("delete: " + team.id);
     this.teamService.deleteTeam(team.id).subscribe(() => {
       this.init();
-    }, (error: HttpErrorResponse) => console.log(console.error()));
+    });
+
   }
 
 
@@ -58,7 +59,8 @@ export class TeamListComponent implements OnInit, OnDestroy {
     console.log("edit " + team);
     this.teamService.updateTeam(team).subscribe(() => {
       this.init();
-    }, (error: HttpErrorResponse) => console.log(console.error()));;
+    });
+
   }
 
   public isLogged(): Boolean {
@@ -69,32 +71,35 @@ export class TeamListComponent implements OnInit, OnDestroy {
     return team.score;
   }
   isTeamsEmpty(): boolean {
-    return this.teams.length === 0;
+    return this.totalCount === 0;
   }
   onSearchClicked(likeChars: string) {
-    this.teamService.getTeams().subscribe((res: Team[]) => {
-      const filteredTeams: Team[] = [...res.filter(t => t.name.toLowerCase().includes(likeChars.toLowerCase()))];
-      console.log("filteredTeams: " + " " + this.jsonPipe.transform(filteredTeams));
+    this.teamService.getTeams(this.pageEvent.pageSize, 0).subscribe((res: PageableTeam) => {
+      const filteredTeams: Team[] = [...res.teams.filter(t => t.name.toLowerCase().includes(likeChars.toLowerCase()))];
       this.teams = filteredTeams;
-    }, (error: HttpErrorResponse) => {
-      this.init();
-      console.log(console.error())
     });
   }
 
-  getLenght(pageSize: number): number {
-    return Math.round(this.teams.length / pageSize) === 0 ? Math.round(this.teams.length / pageSize) + 1 : Math.round(this.teams.length / pageSize);
+  getLenght(): number {
+    return this.totalCount;
   }
 
   getPageSizeOption(): number[] {
-    return [this.pageSize, this.pageSize * 2, this.pageSize * 10]
+    return [this.pageSize, this.pageSize * 2, this.pageSize * 4]
   }
 
   getInitialPageEvent(): PageEvent {
     let initialPageEvent = new PageEvent();
-    initialPageEvent.pageIndex = 1;
     initialPageEvent.pageSize = this.pageSize;
-    initialPageEvent.length = this.getLenght(initialPageEvent.pageSize);
+    initialPageEvent.length = this.getLenght();
     return initialPageEvent;
+  }
+
+  onPageEvent(pageEvent: PageEvent) {
+    console.log(this.jsonPipe.transform(pageEvent));
+    this.teamService.getTeams(pageEvent.pageSize, (pageEvent.pageIndex) * pageEvent.pageSize).subscribe((result: PageableTeam) => {
+      this.teams = result.teams;
+      this.totalCount = result.totalCount;
+    });;
   }
 }

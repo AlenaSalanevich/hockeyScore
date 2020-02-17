@@ -42,7 +42,7 @@ public class TeamController {
     @ResponseBody
     public ResponseEntity update(@PathVariable final Integer id, @RequestBody TeamMutableData data) {
         teamService.update(id, data);
-        return ResponseEntity.ok("Team is updated!");
+        return ResponseEntity.ok().body(null);
     }
 
     @DeleteMapping("/{id}")
@@ -50,7 +50,7 @@ public class TeamController {
     @ResponseBody
     public ResponseEntity delete(@PathVariable final Integer id) {
         teamService.delete(id);
-        return ResponseEntity.ok("Team is deleted!");
+        return ResponseEntity.ok().body(null);
     }
 
     @GetMapping("/{id}")

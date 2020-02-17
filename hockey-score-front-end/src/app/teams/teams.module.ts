@@ -28,11 +28,12 @@ import { OderByPipe } from '../shared/pipes/oder-by.pipe';
     MatTableModule,
     MatInputModule,
     RouterModule,
-    FormsModule, 
+    FormsModule,
     MatPaginatorModule,
     ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [OderByPipe]
+  providers: [OderByPipe],
+  entryComponents: []
 })
 export class TeamsModule { }
