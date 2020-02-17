@@ -1,5 +1,6 @@
 package com.epam.hockey.score.api.rest.controller;
 
+import com.epam.hockey.score.api.model.team.PageableTeam;
 import com.epam.hockey.score.api.model.team.Team;
 import com.epam.hockey.score.api.model.team.TeamMutableData;
 import com.epam.hockey.score.api.rest.Validator;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collection;
+import java.util.Optional;
 
 @Api(tags = "Team controller")
 @Controller
@@ -21,6 +22,8 @@ import java.util.Collection;
 @RequestMapping(path = "api/teams")
 public class TeamController {
 
+    public static final int DEFAULT_LIMIT = 100;
+    public static final int DEFAULT_OFFSET = 0;
     @Autowired
     private TeamService teamService;
     @Autowired
@@ -61,9 +64,7 @@ public class TeamController {
     @ApiOperation("Load all teams")
     @ResponseBody
     @ResponseHeader(name = "Access-Control-Allow-Origin", description = "*")
-    public Collection<Team> get(HttpServletResponse response) {
-        return teamService.get();
+    public PageableTeam get(@RequestParam(value = "limit", required = false) Integer limit, @RequestParam(value = "offset", required = false) Integer offset, HttpServletResponse response) {
+        return teamService.get(Optional.ofNullable(limit).orElse(DEFAULT_LIMIT), Optional.ofNullable(offset).orElse(DEFAULT_OFFSET));
     }
-
-
 }
