@@ -16,7 +16,7 @@ import {FormControl,  Validators} from '@angular/forms';
 })
 export class AddTeamComponent implements OnInit {
 
-  scoreFormControl = new FormControl('', [
+  fplayerNames = new FormControl('', [
     Validators.required
   ]);
 

@@ -2,11 +2,12 @@ import { Injectable, ErrorHandler } from '@angular/core';
 import { Team } from '../shared/model/team/team';
 import { JsonPipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { OderByPipe } from '../shared/pipes/oder-by.pipe';
 
 import { map, catchError } from 'rxjs/operators';
 import { PageableTeam } from '../shared/model/team/pageable-team';
+import { FormsModule } from '@angular/forms';
 
 
 @Injectable({
@@ -21,8 +22,14 @@ export class TeamService {
 
   getTeams(limit: number, offset: number): Observable<PageableTeam> {
     console.log("from TeamService get teams");
-    return this.http.get<PageableTeam>(TeamService.TEAMS_URL, { params: new HttpParams().set('limit', limit.toString()).set('offset', offset.toString()) });
-  }
+    return this.http.get<PageableTeam>(TeamService.TEAMS_URL, { params: new HttpParams().set('limit', limit.toString()).set('offset', offset.toString()) })
+      .pipe(map(data => { return data }),
+        catchError(err => {
+          console.log(err);
+          alert('Some error ocuurs while retrieving data from server, error details:' + this.jsPipe.transform(err));
+          return throwError(err);
+        }))
+  };
 
   getTeam(id: number): Observable<Team> {
     console.log("from TeamService get team by id");

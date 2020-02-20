@@ -44,6 +44,21 @@
                 </mat-expansion-panel>
             </mat-input-container>
 
+            <mat-input-container class="add-team-data-row">
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Select players
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-selection-list multiple formControlName="fplayerNames">
+                        <mat-list-option *ngFor="let pls of playerNames" [ngValue]="pls" (change)='changePlayers($event)'>
+                            {{pls}}
+                        </mat-list-option>
+                    </mat-selection-list>
+                </mat-expansion-panel>
+            </mat-input-container>
+
             <div class="add-team-buttons">
                 <button class="add-team-button" type="submit" mat-raised-button color="primary"
                     [disabled]="!createForm.form.valid"> Add team

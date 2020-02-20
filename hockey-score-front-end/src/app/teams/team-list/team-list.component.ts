@@ -38,7 +38,10 @@ export class TeamListComponent implements OnInit, OnDestroy {
     this.teamSubscription = this.teamService.getTeams(this.pageSize, 0).subscribe((result: PageableTeam) => {
       this.teams = result.teams;
       this.totalCount = result.totalCount;
-    });
+    }, (error => {
+      this.teams = [];
+      this.totalCount = 0;
+    }));
   }
 
   ngOnDestroy(): void {
@@ -53,7 +56,6 @@ export class TeamListComponent implements OnInit, OnDestroy {
     });
 
   }
-
 
   onEditClicked(team) {
     console.log("edit " + team);
@@ -80,8 +82,8 @@ export class TeamListComponent implements OnInit, OnDestroy {
     });
   }
 
-  onCancelSearchClicked(likeChars: string) {
-    this.onSearchClicked(likeChars);
+  onCancelSearchClicked() {
+    this.init();
   }
 
   getLenght(): number {
@@ -104,6 +106,7 @@ export class TeamListComponent implements OnInit, OnDestroy {
     this.teamService.getTeams(pageEvent.pageSize, (pageEvent.pageIndex) * pageEvent.pageSize).subscribe((result: PageableTeam) => {
       this.teams = result.teams;
       this.totalCount = result.totalCount;
-    });;
+    }
+    );;
   }
 }
