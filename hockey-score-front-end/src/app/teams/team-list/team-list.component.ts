@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { HttpErrorResponse } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import { PageableTeam } from 'src/app/shared/model/team/pageable-team';
 
 @Component({

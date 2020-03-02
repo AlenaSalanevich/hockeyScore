@@ -19,8 +19,7 @@ import { ModalComponent } from './shared/modal/modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ModalComponent
+    AppComponent
   ],
   imports: [
     FormsModule,

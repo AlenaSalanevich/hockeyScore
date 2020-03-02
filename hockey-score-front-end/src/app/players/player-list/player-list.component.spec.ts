@@ -4,7 +4,7 @@ import { PlayerListComponent } from './player-list.component';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayerService } from '../player.service';
 import { Player } from 'src/app/shared/model/player/player';

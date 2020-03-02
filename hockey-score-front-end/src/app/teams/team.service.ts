@@ -1,13 +1,15 @@
 import { Injectable, ErrorHandler } from '@angular/core';
 import { Team } from '../shared/model/team/team';
 import { JsonPipe } from '@angular/common';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { OderByPipe } from '../shared/pipes/oder-by.pipe';
 
 import { map, catchError } from 'rxjs/operators';
 import { PageableTeam } from '../shared/model/team/pageable-team';
 import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../shared/modal/modal.component';
 
 
 @Injectable({
@@ -17,7 +19,7 @@ export class TeamService {
 
   private static readonly TEAMS_URL: string = 'http://localhost:8090/api/teams';
 
-  constructor(private readonly jsPipe: JsonPipe, private readonly http: HttpClient, private readonly orderPipe: OderByPipe, private readonly errorHandler: ErrorHandler) {
+  constructor(private readonly jsPipe: JsonPipe, private readonly http: HttpClient, private readonly orderPipe: OderByPipe, public dialog: MatDialog) {
   }
 
   getTeams(limit: number, offset: number): Observable<PageableTeam> {
@@ -25,8 +27,12 @@ export class TeamService {
     return this.http.get<PageableTeam>(TeamService.TEAMS_URL, { params: new HttpParams().set('limit', limit.toString()).set('offset', offset.toString()) })
       .pipe(map(data => { return data }),
         catchError(err => {
-          console.log(err);
-          alert('Some error ocuurs while retrieving data from server, error details:' + this.jsPipe.transform(err));
+          const errorToString = this.jsPipe.transform(err);
+          console.log("From teamService: " + errorToString);
+          const dialogRef = this.dialog.open(ModalComponent, {
+            width: '350px',
+            data: { errorMessage: errorToString, errorCode: err.status }
+          });
           return throwError(err);
         }))
   };
