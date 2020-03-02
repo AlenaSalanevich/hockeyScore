@@ -3,30 +3,29 @@ import { Login } from './model/user/login';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { User } from './model/user/user';
+import { AppErrorHandler } from './app-error-handler';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private readonly httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient, private readonly errorHandler: AppErrorHandler) {
   }
 
   public currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   public isLogin: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
-  login(userCredentials: Login): string {
+  login(userCredentials: Login) {
     let errorMessage: string = '';
     this.httpClient.post<User>('http://localhost:8090/api/login', userCredentials).subscribe((result: User) => {
       this.currentUser.next(result);
       this.isLogin.next(result.isAuth);
     }, (error: HttpErrorResponse) => {
-      // console.error();
       this.isLogin.next(false);
       this.currentUser.next(null)
-      errorMessage = error.message;
+      this.errorHandler.handleError(error);
     });
-    return errorMessage;
   }
 
   logout() {
@@ -34,7 +33,7 @@ export class AuthService {
       this.isLogin.next(false);
       this.currentUser.next(null)
     }, (error: HttpErrorResponse) => {
-      console.error();
+      this.errorHandler.handleError(error);
     });
   }
 }
