@@ -17,7 +17,6 @@ export class AuthService {
   public isLogin: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   login(userCredentials: Login) {
-    let errorMessage: string = '';
     this.httpClient.post<User>('http://localhost:8090/api/login', userCredentials).subscribe((result: User) => {
       this.currentUser.next(result);
       this.isLogin.next(result.isAuth);
