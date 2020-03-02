@@ -17,6 +17,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
 import { ModalComponent } from './shared/modal/modal.component';
 import { AppErrorHandler } from './shared/app-error-handler';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -33,9 +37,17 @@ import { AppErrorHandler } from './shared/app-error-handler';
     TeamsModule,
     PlayersModule,
     AppRoutingModule,
-    GamesModule
+    GamesModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers, 
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      }
+    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [DatePipe, JsonPipe, AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, { provide: ErrorHandler, useClass: AppErrorHandler }],
+  providers: [DatePipe, JsonPipe, AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [ModalComponent]

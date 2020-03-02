@@ -13,7 +13,7 @@ export class AppErrorHandler implements ErrorHandler {
         console.log(this.jsPipe.transform(e));
 
         const dialogRef = this.dialog.open(ModalComponent, {
-            width: '250px',
+            width: '450px',
             data: { errorMessage: this.jsPipe.transform(e), errorCode: e.status }
         });
     }

@@ -121,6 +121,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "hockey-score"
+    }
+  },
+  "defaultProject": "hockey-score",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

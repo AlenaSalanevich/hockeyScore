@@ -6,7 +6,6 @@ import { PlayerService } from 'src/app/players/player.service';
 import { Player } from 'src/app/shared/model/player/player';
 import { JsonPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import {FormControl,  Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-team',
@@ -15,10 +14,6 @@ import {FormControl,  Validators} from '@angular/forms';
   providers: [TeamService]
 })
 export class AddTeamComponent implements OnInit {
-
-  fplayerNames = new FormControl('', [
-    Validators.required
-  ]);
 
   team: Team;
 
