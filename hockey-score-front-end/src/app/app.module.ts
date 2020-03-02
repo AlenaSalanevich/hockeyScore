@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -16,6 +16,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
 import { ModalComponent } from './shared/modal/modal.component';
+import { AppErrorHandler } from './shared/app-error-handler';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ModalComponent } from './shared/modal/modal.component';
     AppRoutingModule,
     GamesModule
   ],
-  providers: [DatePipe, JsonPipe, AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [DatePipe, JsonPipe, AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, { provide: ErrorHandler, useClass: AppErrorHandler }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [ModalComponent]
