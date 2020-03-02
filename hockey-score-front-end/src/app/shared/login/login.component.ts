@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Login } from '../model/user/login';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   @Output() public onLogin = new EventEmitter<boolean>();
 
-  constructor(private readonly router: Router, private readonly authService: AuthService) {
+  constructor(private readonly router: Router, private readonly authService: AuthService, private store: Store<Login>) {
   }
 
   minPasswordLength: number = 2;
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
   tryLogin() {
     console.log(this.login.login, this.login.password);
     this.authService.login(this.login);
+    this.store.dispatch(login(this.login));
     this.router.navigateByUrl('/home')
   }
 
