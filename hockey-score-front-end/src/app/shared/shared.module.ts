@@ -18,7 +18,8 @@ import {
   MatSelectModule,
   MatTabsModule,
   MatExpansionPanel,
-  MatExpansionModule
+  MatExpansionModule,
+  MatDialogModule
 } from "@angular/material";
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -35,6 +36,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { DurationPipe } from './pipes/duration.pipe';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ErrorComponent } from './error/error.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [HeaderComponent,
@@ -50,7 +52,8 @@ import { ErrorComponent } from './error/error.component';
     NotfoundComponent,
     DurationPipe,
     PaginationComponent,
-    ErrorComponent],
+    ErrorComponent, 
+    ModalComponent],
   exports: [HeaderComponent,
     FooterComponent,
     HomeComponent,
@@ -62,6 +65,7 @@ import { ErrorComponent } from './error/error.component';
     BreadcrumbComponent,
     NotfoundComponent,
     ErrorComponent,
+    ModalComponent,
     DurationPipe],
   imports: [
     CommonModule,
@@ -82,7 +86,8 @@ import { ErrorComponent } from './error/error.component';
     RouterModule,
     MatInputModule,
     FormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

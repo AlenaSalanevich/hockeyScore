@@ -15,10 +15,12 @@ import { DatePipe, JsonPipe } from '@angular/common';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
+import { ModalComponent } from './shared/modal/modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModalComponent
   ],
   imports: [
     FormsModule,
@@ -35,6 +37,7 @@ import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
   ],
   providers: [DatePipe, JsonPipe, AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [ModalComponent]
 })
 export class AppModule { }

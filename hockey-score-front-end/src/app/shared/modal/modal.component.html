@@ -1,0 +1,19 @@
+<h2 mat-dialog-title [ngStyle]="{'background-color':'white', 'color': 'red', 'font-size': '54px', 'text-align': 'center'}">SOME ERROR
+  OCCURS
+</h2>
+<div mat-dialog-content>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+        <mat-panel-title [ngStyle]="{'color': 'red', 'font-size': '22px'}">
+            Click to get more details.
+        </mat-panel-title>
+        <mat-panel-description>
+          {{data.errormessage}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    {{data.errorCode}}
+  </mat-expansion-panel>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>
