@@ -5,10 +5,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthActionTypes, LogIn, LogInSuccess, LoginFailure } from './actions/auth.actions';
 import { User } from '../model/user/user';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/catch';
 import { of } from "rxjs";
 import { tap, catchError, switchMap, map } from 'rxjs/operators';
 
