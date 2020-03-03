@@ -4,7 +4,7 @@ import { createReducer } from '@ngrx/store';
 
 import { on } from 'cluster';
 
-import { LOGIN, LOGOUT } from '../actions/auth.actions';
+import { LOGIN, LOGOUT, LogOut } from '../actions/auth.actions';
 
 export interface AuthState {
     // boolean if user is authenticated
@@ -29,9 +29,10 @@ export const initialState: AuthState = {
 
 const _authReducer = createReducer(initialState,
     on(LOGIN, state => state),
-    on(LOGOUT, state => initialState),
+    on(LogOut, state => initialState),
 );
 
 export function authReducer(state, action) {
     return _authReducer(state, action);
 }
+

@@ -1,18 +1,39 @@
-import { createAction, props } from '@ngrx/store'
+import { Action } from '@ngrx/store'
 import { Login } from '../../model/user/login';
+import { User } from '../../model/user/user';
 
-export const LOGIN_SUCCESS = createAction('[Auth API] Login Success');
+export class LogIn implements Action {
+    readonly type = AuthActionTypes.LOGIN;
+    constructor(public payload: Login) { }
+}
 
-export const LOGIN_ERROR = createAction('[Auth API] Login Error');
+export class LoginFailure
+    implements Action {
+    readonly type = AuthActionTypes.LOGIN_FAILURE;
+    constructor(public payload: any) { }
+}
 
-export const LOGOUT = createAction('[Auth API] Logout');
+export class LogInSuccess implements Action {
+    readonly type = AuthActionTypes.LOGIN_SUCCESS;
+    constructor(public payload: User) { }
+}
+export class LogOut implements Action {
+    readonly type = AuthActionTypes.LOGOUT;
+    constructor() { }
+}
 
-export const LOGIN = createAction(
-    '[Login Page] Login',
-    props<{ login: Login }>()
-);
 
+
+export type All = | LogIn | LogOut | LogInSuccess | LoginFailure;
 
 export enum AuthActionTypes {
-    LOGIN = '[Auth] Login'
-  }
+
+    LOGIN_SUCCESS = '[Auth API] Login Success',
+
+    LOGIN_FAILURE = '[Auth API] Login Failure',
+
+    LOGOUT = '[Auth API] Logout',
+
+    LOGIN = '[Login Page] Login'
+
+}

@@ -3,14 +3,14 @@ import { Login } from '../model/user/login';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Store } from '@ngrx/store';
-import { LOGIN } from '../authstore/auth.actions';
+import { LogIn } from '../authstore/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   login: Login;
   error: string;
@@ -27,13 +27,7 @@ export class LoginComponent implements OnInit {
 
   tryLogin() {
     console.log(this.login.login, this.login.password);
-   // this.authService.login(this.login);
-    this.store.dispatch(LOGIN(this.login));
+    this.store.dispatch(new LogIn(this.login));
     this.router.navigateByUrl('/home')
-  }
-
-  ngOnInit() {
-    this.login = new Login('', '');
-    this.error = '';
   }
 }
