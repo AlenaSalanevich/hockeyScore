@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Store } from '@ngrx/store';
 import { LogIn } from '../authstore/actions/auth.actions';
+import { User } from '../model/user/user';
+import { AppState } from '../authstore/app.states';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent {
 
   @Output() public onLogin = new EventEmitter<boolean>();
 
-  constructor(private readonly router: Router, private readonly authService: AuthService, private store: Store<Login>) {
+  constructor(private readonly router: Router, private store: Store<AppState>) {
   }
 
   minPasswordLength: number = 2;

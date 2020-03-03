@@ -1,38 +1,62 @@
 import { User } from '../../model/user/user';
 
-import { createReducer } from '@ngrx/store';
-
-import { on } from 'cluster';
-
-import { LOGIN, LOGOUT, LogOut } from '../actions/auth.actions';
+import { All, AuthActionTypes } from '../actions/auth.actions';
+import { createFeatureSelector } from '@ngrx/store';
+import { AppState } from '../app.states';
 
 export interface AuthState {
-    // boolean if user is authenticated
+
     authenticated: boolean;
-
-    // error message
-    error?: string;
-
-
-    // the authenticated user
+    error?: string | null;
     user?: User;
-
-    errorMessage: string | null;
 }
 
 export const initialState: AuthState = {
     authenticated: false,
-    error: '',
+    error: null,
     user: new User(),
-    errorMessage: null
 };
 
-const _authReducer = createReducer(initialState,
-    on(LOGIN, state => state),
-    on(LogOut, state => initialState),
-);
-
-export function authReducer(state, action) {
-    return _authReducer(state, action);
+export function authReducer(state = initialState, action: All): AuthState {
+    switch (action.type) {
+        case AuthActionTypes.LOGIN_SUCCESS: {
+            return {
+                ...state,
+                authenticated: action.payload.isAuth,
+                user: {
+                    id: action.payload.id,
+                    password: action.payload.password,
+                    login: action.payload.login,
+                    name: action.payload.name,
+                    email: action.payload.email,
+                    isAuth: action.payload.isAuth,
+                    token: {
+                        token: action.payload.token.token,
+                        expirationDate: action.payload.token.expirationDate
+                    }
+                },
+                error: null
+            };
+        }
+        case AuthActionTypes.LOGIN_FAILURE: {
+            return {
+                ...state,
+                error: 'Incorrect login and/or password.'
+            };
+        }
+        case AuthActionTypes.LOGOUT: {
+            return {
+                ...state,
+                authenticated: false,
+                user: new User(),
+                error: null
+            };
+        }
+        default: {
+            return state;
+        }
+    }
 }
+
+export const selectAuthState = createFeatureSelector<AuthState>('auth');
 
