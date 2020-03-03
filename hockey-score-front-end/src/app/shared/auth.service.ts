@@ -35,4 +35,10 @@ export class AuthService {
       this.errorHandler.handleError(error);
     });
   }
+
+
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
+
 }

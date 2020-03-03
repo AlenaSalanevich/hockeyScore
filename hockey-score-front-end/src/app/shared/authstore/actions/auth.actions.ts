@@ -11,3 +11,8 @@ export const LOGIN = createAction(
     '[Login Page] Login',
     props<{ login: Login }>()
 );
+
+
+export enum AuthActionTypes {
+    LOGIN = '[Auth] Login'
+  }

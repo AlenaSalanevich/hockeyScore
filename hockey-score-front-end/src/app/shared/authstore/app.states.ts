@@ -1,1 +1,7 @@
-import { User } from '../model/user/user';
+import * as auth from './reducers/auth.reducer'
+
+
+export interface AppState {
+    
+    authState: auth.AuthState;
+}

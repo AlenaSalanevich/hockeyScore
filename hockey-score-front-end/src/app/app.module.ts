@@ -16,11 +16,12 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth-interceptor';
 import { ModalComponent } from './shared/modal/modal.component';
-import { AppErrorHandler } from './shared/app-error-handler';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { AuthEffects } from './shared/authstore/auth.effects';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,9 @@ import { environment } from '../environments/environment';
     PlayersModule,
     AppRoutingModule,
     GamesModule,
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(reducers, {
-      metaReducers, 
+      metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,

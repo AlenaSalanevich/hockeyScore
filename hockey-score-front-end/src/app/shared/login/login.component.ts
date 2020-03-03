@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   tryLogin() {
     console.log(this.login.login, this.login.password);
-    this.authService.login(this.login);
+   // this.authService.login(this.login);
     this.store.dispatch(LOGIN(this.login));
     this.router.navigateByUrl('/home')
   }
