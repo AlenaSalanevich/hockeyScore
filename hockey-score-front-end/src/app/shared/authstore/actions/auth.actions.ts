@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Action } from 'rxjs/internal/scheduler/Action'
-import { Login } from '../model/user/login';
+import { Login } from '../../model/user/login';
 
 export const LOGIN_SUCCESS = createAction('[Auth API] Login Success');
 

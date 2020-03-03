@@ -1,7 +1,10 @@
-import { createReducer, on } from '@ngrx/store';
-import { login, LOGOUT } from './auth.actions';
-import { User } from '../model/user/user';
+import { User } from '../../model/user/user';
 
+import { createReducer } from '@ngrx/store';
+
+import { on } from 'cluster';
+
+import { LOGIN, LOGOUT } from '../actions/auth.actions';
 
 export interface AuthState {
     // boolean if user is authenticated
@@ -10,17 +13,22 @@ export interface AuthState {
     // error message
     error?: string;
 
+
     // the authenticated user
     user?: User;
+
+    errorMessage: string | null;
 }
+
 export const initialState: AuthState = {
     authenticated: false,
     error: '',
-    user: new User()
+    user: new User(),
+    errorMessage: null
 };
 
 const _authReducer = createReducer(initialState,
-    on(login, state => state),
+    on(LOGIN, state => state),
     on(LOGOUT, state => initialState),
 );
 
