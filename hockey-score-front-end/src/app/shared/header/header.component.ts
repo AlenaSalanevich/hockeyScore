@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { Subscription } from 'rxjs';
 import { User } from '../model/user/user';
+import { Store } from '@ngrx/store';
+import { AppState } from '../authstore/app.states';
+import { LogOut } from '../authstore/actions/auth.actions';
+import { selectAuthState } from '../authstore/reducers/auth.reducer';
 
 
 @Component({
@@ -10,29 +12,21 @@ import { User } from '../model/user/user';
   styleUrls: ['./header.component.css'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
 
   public isLogin: Boolean;
   public currentUser: User;
-  public isLoginSubscription: Subscription;
-  private currentUserSubscription: Subscription;
 
-  constructor(private readonly authService: AuthService) {
+  constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.currentUserSubscription = this.authService.currentUser.subscribe(res => this.currentUser = res);
-    this.isLoginSubscription = this.authService.isLogin.subscribe(res => this.isLogin = res)
-  }
-
-  ngOnDestroy(): void {
-    this.currentUserSubscription.unsubscribe();
-    this.isLoginSubscription.unsubscribe();
+    this.store.select(selectAuthState).subscribe(res => this.currentUser = res.user);
+    this.store.select(selectAuthState).subscribe(res => this.isLogin = res.authenticated);
   }
 
   logout() {
     console.log('log out!');
-    this.isLogin = false;
-    this.authService.logout();
+    this.store.dispatch(new LogOut());
   }
 }

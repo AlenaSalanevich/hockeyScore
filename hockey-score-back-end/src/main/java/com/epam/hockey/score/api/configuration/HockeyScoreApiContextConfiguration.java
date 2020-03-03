@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class HockeyScoreApiContextConfiguration {
 
-    private final String PATH = "C:\\Users\\Alena_Salanevich\\IdeaProjects\\hockeyScore\\hockey-score-back-end\\src\\main\\resources";
+    private final String PATH = "C:\\work\\mentoring\\hockeyScore\\hockey-score-back-end\\src\\main\\resources";
 
     @Bean
     public ObjectMapper mapper() {

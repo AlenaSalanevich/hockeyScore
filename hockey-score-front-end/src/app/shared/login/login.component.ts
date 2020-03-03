@@ -3,21 +3,23 @@ import { Login } from '../model/user/login';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Store } from '@ngrx/store';
-import { LOGIN } from '../authstore/auth.actions';
+import { LogIn } from '../authstore/actions/auth.actions';
+import { User } from '../model/user/user';
+import { AppState } from '../authstore/app.states';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  login: Login;
-  error: string;
+  login: Login = new Login('', '');
+  error: string = '';
 
   @Output() public onLogin = new EventEmitter<boolean>();
 
-  constructor(private readonly router: Router, private readonly authService: AuthService, private store: Store<Login>) {
+  constructor(private readonly router: Router, private store: Store<AppState>) {
   }
 
   minPasswordLength: number = 2;
@@ -27,13 +29,11 @@ export class LoginComponent implements OnInit {
 
   tryLogin() {
     console.log(this.login.login, this.login.password);
-   // this.authService.login(this.login);
-    this.store.dispatch(LOGIN(this.login));
+    const payload = {
+      login: this.login.login,
+      password: this.login.password
+    };
+    this.store.dispatch(new LogIn(payload));
     this.router.navigateByUrl('/home')
-  }
-
-  ngOnInit() {
-    this.login = new Login('', '');
-    this.error = '';
   }
 }
