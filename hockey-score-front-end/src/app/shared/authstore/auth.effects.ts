@@ -9,7 +9,8 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
-import { tap } from 'rxjs/operators';
+import { of } from "rxjs";
+import { tap, catchError, switchMap, map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthEffects {
@@ -21,19 +22,16 @@ export class AuthEffects {
     ) { }
 
     @Effect()
-    LogIn: Observable<User> = this.actions.ofType(AuthActionTypes.LOGIN)
-        .map((action: LogIn) => action.payload)
-        .switchMap(payload => {
-            return this.authService.login(payload)
-                .map((user) => {
-                    console.log(user);
-                    return new LogInSuccess(user);
-                })
-                .catch((error) => {
+    LogIn: Observable<any> = this.actions.pipe(ofType<LogIn>(AuthActionTypes.LOGIN),
+        switchMap((action: LogIn) =>
+            this.authService.login(action.payload).pipe(map((data: User) => {
+                return new LogInSuccess(data);
+            }),
+                catchError((error) => {
                     console.log(error);
-                    return Observable.of(new LoginFailure({ error: error }));
-                });
-        });
+                    return of(new LoginFailure({ error: error }));
+                }))));
+
 
     @Effect({ dispatch: false })
     LogInSuccess: Observable<any> = this.actions.pipe(
@@ -52,9 +50,8 @@ export class AuthEffects {
     LogOut: Observable<any> = this.actions.pipe(
         ofType(AuthActionTypes.LOGOUT),
         tap(() => {
-          localStorage.removeItem('token');
+            localStorage.removeItem('token');
             this.router.navigateByUrl('/');
         })
     );
-
 }
