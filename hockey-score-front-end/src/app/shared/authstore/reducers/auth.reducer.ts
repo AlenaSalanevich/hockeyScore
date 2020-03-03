@@ -58,5 +58,5 @@ export function authReducer(state = initialState, action: All): AuthState {
     }
 }
 
-export const selectAuthState = createFeatureSelector<AuthState>('auth');
+export const selectAuthState = createFeatureSelector<AuthState>('authState');
 

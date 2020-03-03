@@ -14,8 +14,8 @@ import { AppState } from '../authstore/app.states';
 })
 export class LoginComponent {
 
-  login: Login;
-  error: string;
+  login: Login = new Login('', '');
+  error: string = '';
 
   @Output() public onLogin = new EventEmitter<boolean>();
 
@@ -29,7 +29,11 @@ export class LoginComponent {
 
   tryLogin() {
     console.log(this.login.login, this.login.password);
-    this.store.dispatch(new LogIn(this.login));
+    const payload = {
+      login: this.login.login,
+      password: this.login.password
+    };
+    this.store.dispatch(new LogIn(payload));
     this.router.navigateByUrl('/home')
   }
 }

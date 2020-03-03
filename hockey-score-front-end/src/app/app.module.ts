@@ -22,6 +22,7 @@ import { reducers, metaReducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AuthEffects } from './shared/authstore/auth.effects';
+import { authReducer } from './shared/authstore/reducers/auth.reducer';
 
 @NgModule({
   declarations: [
@@ -40,13 +41,14 @@ import { AuthEffects } from './shared/authstore/auth.effects';
     AppRoutingModule,
     GamesModule,
     EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
-      }
-    }),
+    /*  StoreModule.forRoot(reducers, {
+       metaReducers,
+       runtimeChecks: {
+         strictStateImmutability: true,
+         strictActionImmutability: true,
+       }
+     }), */
+    StoreModule.forRoot({ authState: authReducer }),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [DatePipe, JsonPipe, AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

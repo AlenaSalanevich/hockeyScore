@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ErrorHandler, Output, ChangeDetectorRef } from '@angular/core';
 import { Team } from 'src/app/shared/model/team/team';
 import { TeamService } from '../team.service';
-import { AuthService } from 'src/app/shared/auth.service';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { HttpErrorResponse } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
 import { PageEvent } from '@angular/material/paginator';
 import { PageableTeam } from 'src/app/shared/model/team/pageable-team';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/shared/authstore/app.states';
+import { selectAuthState } from 'src/app/shared/authstore/reducers/auth.reducer';
 
 @Component({
   selector: 'app-team-list',
@@ -17,20 +18,19 @@ export class TeamListComponent implements OnInit, OnDestroy {
 
   public teams: Team[] = [];
   private isLogin: Boolean;
-  public isLoginSubscription: Subscription;
   private teamSubscription: Subscription;
   public pageSize: number = 5;
   public pageEvent: PageEvent;
   private totalCount: number = 0;
 
   constructor(readonly teamService: TeamService,
-    private readonly authService: AuthService,
+    private store: Store<AppState>,
     private readonly jsonPipe: JsonPipe, private readonly view: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     this.init();
-    this.isLoginSubscription = this.authService.isLogin.subscribe(result => this.isLogin = result);
+    this.store.select(selectAuthState).subscribe(res => this.isLogin = res.authenticated);
     this.pageEvent = this.getInitialPageEvent();
   }
 
@@ -45,7 +45,6 @@ export class TeamListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.isLoginSubscription.unsubscribe();
     this.teamSubscription.unsubscribe();
   }
 
