@@ -4,8 +4,8 @@ checks:
   config:
    treshold: 10
 plugins:
- pmd:
-  enabled: true
-  config:
-    threashold: "C"
-  
+  eslint:
+    enabled: true
+    checks:
+      complexity:
+        enabled: true
