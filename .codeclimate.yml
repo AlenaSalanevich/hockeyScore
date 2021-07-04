@@ -1,0 +1,11 @@
+version: "2"
+checks:
+ method-complexity:
+  config:
+   treshold: 10
+plugins:
+ radon:
+  enabled: true
+  config:
+    threashold: "C"
+  
